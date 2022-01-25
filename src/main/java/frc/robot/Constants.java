@@ -23,5 +23,8 @@ public final class Constants {
   public static final double GEAR_RATIO = 10.81/1.0;
   public static final double GRAVITY = 386.09; // inches/ sec ^2
 
+  //Speed
+  public static final double shooterSpeed = 0.5;
+
   
 }
