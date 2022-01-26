@@ -28,13 +28,12 @@ public class ShooterSubsystem extends SubsystemBase {
     double power = 0;
     if(stick.getRawButton(5) == true)
     {
-      power = 1;
+      power = 0.05;
     }
     else if(stick.getRawButton(3) == true)
     {
-      power = -1;
+      power = -0.05;
     }
-    //power = power;
     shooterLeft.set(power);
   }
 

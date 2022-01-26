@@ -39,6 +39,9 @@ public class RobotContainer {
     m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
 
+    shooterCommand.addRequirements(shooterSubsystem);
+    shooterSubsystem.setDefaultCommand(shooterCommand);
+
     driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();

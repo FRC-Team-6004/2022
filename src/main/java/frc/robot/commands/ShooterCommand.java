@@ -34,7 +34,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute()
   {
-    ShooterSubsystem.joystickShoot(RobotContainer.driveStick, Constants.shooterSpeed);
+    ShooterSubsystem.joystickShoot(RobotContainer.driveStick);
   }
 
   // Called once the command ends or is interrupted.
