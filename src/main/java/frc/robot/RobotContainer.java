@@ -7,10 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
-//import frc.robot.commands.DriveTrainCommand;
+import frc.robot.commands.DriveTrainCommand;
 import frc.robot.commands.ExampleCommand;
-//import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.commands.TurretCommand;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -28,32 +30,43 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem;
   private final ShooterSubsystem shooterSubsystem;
-  //private final DriveTrainSubsystem driveTrainSubsystem;
+  private final DriveTrainSubsystem driveTrainSubsystem;
+  private final TurretSubsystem turretSubsystem;
 
   private final ExampleCommand m_autoCommand;
   private final ShooterCommand shooterCommand;
-  //private final DriveTrainCommand driveTrainCommand;
+  private final DriveTrainCommand driveTrainCommand;
+  private final TurretCommand turretCommand;
 
   public static Joystick driveStick;
+  public static XboxController driveXboxController;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_exampleSubsystem = new ExampleSubsystem();
     shooterSubsystem = new ShooterSubsystem();
-    //driveTrainSubsystem = new DriveTrainSubsystem();
+    driveTrainSubsystem = new DriveTrainSubsystem();
+    turretSubsystem = new TurretSubsystem();
   
     m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
-    //driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
+    driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
+    turretCommand = new TurretCommand(turretSubsystem);
 
     shooterCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterCommand);
-    //driveTrainCommand.addRequirements(driveTrainSubsystem);
-    //driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
+    driveTrainCommand.addRequirements(driveTrainSubsystem);
+    driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
+
+    turretCommand.addRequirements(turretSubsystem);
+    turretSubsystem.setDefaultCommand(turretCommand);
+
     
     driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();
+
+    driveXboxController = new XboxController(1);
   }
 
   /**
@@ -62,7 +75,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
