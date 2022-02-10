@@ -35,7 +35,7 @@ public class IntakeCommand extends CommandBase {
   public void execute()
   {
     IntakeSubsystem.rotateIntake(RobotContainer.driveXboxController);
-    //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
+    IntakeSubsystem.IntakeManual(RobotContainer.driveXboxController, .2);
   }
 
   // Called once the command ends or is interrupted.

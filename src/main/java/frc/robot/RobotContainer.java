@@ -5,21 +5,19 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
-import frc.robot.commands.ShooterCommand;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

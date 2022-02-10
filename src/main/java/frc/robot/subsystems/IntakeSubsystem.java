@@ -27,11 +27,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
 
-    public void rotateIntake(XboxController controller)
+    public static void rotateIntake(XboxController controller)
     {
         double angle = 0;
         if(controller.getYButton()){ angle = 0; } //arbitrary
-        if(controller.getBButton()){ angle = 10; } //arbitrary
+        if(controller.getBButton()){ angle = 20; } //arbitrary
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
