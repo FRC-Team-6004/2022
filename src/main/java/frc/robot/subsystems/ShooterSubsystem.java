@@ -43,8 +43,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterRight.restoreFactoryDefaults();
     shooterBack.restoreFactoryDefaults();
 
-    shooterRight.follow(shooterLeft);
-    shooterRight.setInverted(true);
+    shooterRight.follow(shooterLeft, true);
 
     shooterLeft.setIdleMode(IdleMode.kCoast);
     shooterRight.setIdleMode(IdleMode.kCoast);
@@ -110,19 +109,17 @@ public class ShooterSubsystem extends SubsystemBase {
   public static void joystickShoot(Joystick stick)
   {
 
-    double slideVal = (-stick.getRawAxis(3)+1)/-2;
+    double slideVal = (-stick.getRawAxis(3)+1)/-2; // TODO: Fix this math
     
     if(stick.getRawButton(1))
     {
       shooterLeft.setVoltage(slideVal*12);
-      shooterRight.setVoltage(-slideVal*12);   
       shooterBack.setVoltage(slideVal*12*.85);   
 
     }
     else 
     {
       shooterLeft.setVoltage(0);
-      shooterRight.setVoltage(0); 
       shooterBack.setVoltage(0);   
 
     }

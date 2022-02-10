@@ -18,7 +18,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ShooterSubsystem;
-
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.IntakeCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,11 +33,13 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem;
   private final DriveTrainSubsystem driveTrainSubsystem;
   private final TurretSubsystem turretSubsystem;
+  private final IntakeSubsystem intakeSubsystem;
 
   private final ExampleCommand m_autoCommand;
   private final ShooterCommand shooterCommand;
   private final DriveTrainCommand driveTrainCommand;
   private final TurretCommand turretCommand;
+  private final IntakeCommand intakeCommand;
 
   public static Joystick driveStick;
   public static XboxController driveXboxController;
@@ -47,19 +50,22 @@ public class RobotContainer {
     shooterSubsystem = new ShooterSubsystem();
     driveTrainSubsystem = new DriveTrainSubsystem();
     turretSubsystem = new TurretSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
   
     m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
     turretCommand = new TurretCommand(turretSubsystem);
+    intakeCommand = new IntakeCommand(intakeSubsystem);
 
     shooterCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterCommand);
     driveTrainCommand.addRequirements(driveTrainSubsystem);
     driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
-
     turretCommand.addRequirements(turretSubsystem);
     turretSubsystem.setDefaultCommand(turretCommand);
+    intakeCommand.addRequirements(intakeSubsystem);
+    intakeSubsystem.setDefaultCommand(intakeCommand);
 
     
     driveStick = new Joystick(0);
