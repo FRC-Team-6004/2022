@@ -5,8 +5,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.photonvision.PhotonCamera;
@@ -14,7 +12,7 @@ import org.photonvision.PhotonUtils;
 
 public class VisionSubsystem extends SubsystemBase {
   public final double cameraHeight = Units.inchesToMeters(24); //change when measured
-  public final double targetHeight = Units.feetToMeters(5);
+  public final double targetHeight = Units.feetToMeters(8.3);
   public final double cameraPitch = Units.degreesToRadians(0);
 
   PhotonCamera camera = new PhotonCamera("photonvision");
@@ -52,8 +50,7 @@ public class VisionSubsystem extends SubsystemBase {
  
   @Override
   public void periodic() {
-    getDistance();
-    getYaw();
+
   }
   @Override
   public void simulationPeriodic() {
