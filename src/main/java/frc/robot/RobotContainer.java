@@ -5,21 +5,23 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.DriveTrainCommand;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
+
+/*
+import frc.robot.commands.DriveTrainCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurretCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
-import frc.robot.commands.ShooterCommand;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
+*/
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,30 +31,34 @@ import frc.robot.commands.IntakeCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private final ExampleCommand m_autoCommand;
   private final ExampleSubsystem m_exampleSubsystem;
+
+  /*
   private final ShooterSubsystem shooterSubsystem;
   private final DriveTrainSubsystem driveTrainSubsystem;
   private final TurretSubsystem turretSubsystem;
   private final IntakeSubsystem intakeSubsystem;
 
-  private final ExampleCommand m_autoCommand;
   private final ShooterCommand shooterCommand;
   private final DriveTrainCommand driveTrainCommand;
   private final TurretCommand turretCommand;
   private final IntakeCommand intakeCommand;
-
+  */
   public static Joystick driveStick;
   public static XboxController driveXboxController;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_exampleSubsystem = new ExampleSubsystem();
+    m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+    /*
     shooterSubsystem = new ShooterSubsystem();
     driveTrainSubsystem = new DriveTrainSubsystem();
     turretSubsystem = new TurretSubsystem();
     intakeSubsystem = new IntakeSubsystem();
   
-    m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     shooterCommand = new ShooterCommand(shooterSubsystem);
     driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
     turretCommand = new TurretCommand(turretSubsystem);
@@ -67,12 +73,13 @@ public class RobotContainer {
     intakeCommand.addRequirements(intakeSubsystem);
     intakeSubsystem.setDefaultCommand(intakeCommand);
 
-    
+    */
     driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();
 
     driveXboxController = new XboxController(1);
+
   }
 
   /**
