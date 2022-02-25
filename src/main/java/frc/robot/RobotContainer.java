@@ -16,11 +16,9 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.TurretCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
 */
 
 /**
@@ -37,12 +35,10 @@ public class RobotContainer {
   /*
   private final ShooterSubsystem shooterSubsystem;
   private final DriveTrainSubsystem driveTrainSubsystem;
-  private final TurretSubsystem turretSubsystem;
   private final IntakeSubsystem intakeSubsystem;
 
   private final ShooterCommand shooterCommand;
   private final DriveTrainCommand driveTrainCommand;
-  private final TurretCommand turretCommand;
   private final IntakeCommand intakeCommand;
   */
   public static Joystick driveStick;
@@ -56,20 +52,16 @@ public class RobotContainer {
     /*
     shooterSubsystem = new ShooterSubsystem();
     driveTrainSubsystem = new DriveTrainSubsystem();
-    turretSubsystem = new TurretSubsystem();
     intakeSubsystem = new IntakeSubsystem();
   
     shooterCommand = new ShooterCommand(shooterSubsystem);
     driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
-    turretCommand = new TurretCommand(turretSubsystem);
     intakeCommand = new IntakeCommand(intakeSubsystem);
 
     shooterCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterCommand);
     driveTrainCommand.addRequirements(driveTrainSubsystem);
     driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
-    turretCommand.addRequirements(turretSubsystem);
-    turretSubsystem.setDefaultCommand(turretCommand);
     intakeCommand.addRequirements(intakeSubsystem);
     intakeSubsystem.setDefaultCommand(intakeCommand);
 

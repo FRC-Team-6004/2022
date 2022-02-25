@@ -20,14 +20,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class ShooterSubsystem extends SubsystemBase {
   public static CANSparkMax shooterLeft = new CANSparkMax(7, MotorType.kBrushless);
   public static CANSparkMax shooterRight = new CANSparkMax(8, MotorType.kBrushless);
-  public static CANSparkMax shooterBack = new CANSparkMax(9, MotorType.kBrushless);
-
   
   private static RelativeEncoder encoderLeft;
   private static RelativeEncoder encoderRight;
-  private static RelativeEncoder encoderBack;
   private static SparkMaxPIDController pidControllerLeft;
-  private static SparkMaxPIDController pidControllerBack;
 
   public static double kP;
   public static double kI;
@@ -41,24 +37,16 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     shooterLeft.restoreFactoryDefaults();
     shooterRight.restoreFactoryDefaults();
-    shooterBack.restoreFactoryDefaults();
 
     shooterRight.follow(shooterLeft, true);
 
     shooterLeft.setIdleMode(IdleMode.kCoast);
     shooterRight.setIdleMode(IdleMode.kCoast);
-    shooterBack.setIdleMode(IdleMode.kCoast);
-    
     
     pidControllerLeft = shooterLeft.getPIDController();
-    pidControllerBack = shooterBack.getPIDController();
     
     encoderLeft = shooterLeft.getEncoder();
     encoderRight = shooterRight.getEncoder();
-    encoderBack = shooterBack.getEncoder();
-    
-  
-    
 
     // PID coefficients
     kP = 0.0003; //.0004
@@ -79,15 +67,6 @@ public class ShooterSubsystem extends SubsystemBase {
     pidControllerLeft.setIZone(kIz);
     pidControllerLeft.setFF(kFF);
     pidControllerLeft.setOutputRange(kMinOutput, kMaxOutput);
-
-    pidControllerBack.setP(kP);
-    pidControllerBack.setI(kI);
-    pidControllerBack.setD(kD);
-    pidControllerBack.setIZone(kIz);
-    pidControllerBack.setFF(kFF);
-    pidControllerBack.setOutputRange(kMinOutput, kMaxOutput);
-    
-
     
     // display PID coefficients on SmartDashboard
     
@@ -114,20 +93,17 @@ public class ShooterSubsystem extends SubsystemBase {
     if(stick.getRawButton(1))
     {
       shooterLeft.setVoltage(slideVal*12);
-      shooterBack.setVoltage(slideVal*12*.85);   
 
     }
     else 
     {
       shooterLeft.setVoltage(0);
-      shooterBack.setVoltage(0);   
 
     }
     
     SmartDashboard.putNumber("sliderValue", slideVal);
     SmartDashboard.putNumber("encoderRight", encoderRight.getVelocity());
     SmartDashboard.putNumber("encoderLeft", encoderLeft.getVelocity());
-    SmartDashboard.putNumber("encoderBack", encoderBack.getVelocity());
     
   }
 
@@ -154,17 +130,6 @@ public class ShooterSubsystem extends SubsystemBase {
       kMinOutput = min; kMaxOutput = max; 
     }
 
-    if((p != kP)) { pidControllerBack.setP(p); kP = p; }
-    if((i != kI)) { pidControllerBack.setI(i); kI = i; }
-    if((d != kD)) { pidControllerBack.setD(d); kD = d; }
-    if((iz != kIz)) { pidControllerBack.setIZone(iz); kIz = iz; }
-    if((ff != kFF)) { pidControllerBack.setFF(ff); kFF = ff; }
-    if((max != kMaxOutput) || (min != kMinOutput)) { 
-      pidControllerBack.setOutputRange(min, max); 
-      kMinOutput = min; kMaxOutput = max; 
-    }
-
-
     /**
      * PIDController objects are commanded to a set point using the 
      * SetReference() method.
@@ -187,13 +152,11 @@ public class ShooterSubsystem extends SubsystemBase {
     if(stick.getRawButton(1))
     {
       pidControllerLeft.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
-      pidControllerBack.setReference(setPoint*.8, CANSparkMax.ControlType.kVelocity);  
 
     }
     else 
     {
       pidControllerLeft.setReference(0, CANSparkMax.ControlType.kVelocity);
-      pidControllerBack.setReference(0, CANSparkMax.ControlType.kVelocity); 
 
     }
     
@@ -201,7 +164,6 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("setPoint", setPoint);
     SmartDashboard.putNumber("encoderRight", encoderRight.getVelocity());
     SmartDashboard.putNumber("encoderLeft", encoderLeft.getVelocity());
-    SmartDashboard.putNumber("encoderBack", encoderBack.getVelocity());
     
   }
 
