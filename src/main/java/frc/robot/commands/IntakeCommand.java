@@ -34,8 +34,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute()
   {
-    IntakeSubsystem.rotateIntake(RobotContainer.driveXboxController);
-    IntakeSubsystem.IntakeManual(RobotContainer.driveXboxController, .2);
+    m_subsystem.rotateIntake(RobotContainer.driveXboxController);
+    m_subsystem.IntakeManual(RobotContainer.driveXboxController, .2);
   }
 
   // Called once the command ends or is interrupted.

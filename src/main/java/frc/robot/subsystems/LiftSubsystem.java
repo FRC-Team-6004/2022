@@ -9,28 +9,30 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class TurretSubsystem extends SubsystemBase {
+//NOT IN USE
 
-    public static CANSparkMax turret = new CANSparkMax(10, MotorType.kBrushless); 
+public class LiftSubsystem extends SubsystemBase {
+ 
+    public CANSparkMax lift = new CANSparkMax(10, MotorType.kBrushless); 
 
-    public TurretSubsystem() {}
+    public LiftSubsystem() {}
 
-    public void rotateTurret(float speed)
+    public void lift(float speed)
     {
-        turret.setVoltage(speed*12);
+        lift.setVoltage(speed*12);
     }
-    public static void rotateTurretManual(XboxController controller, double speed)
+    public void liftManual(XboxController controller, double speed)
     {
         //double MaxV = 11000/133.3; //12v
 
         if(controller.getXButtonPressed()){
-            turret.setVoltage(speed*12);
+            lift.setVoltage(speed*12);
         }
         else if(controller.getBButtonPressed()){
-            turret.setVoltage(-speed*12);
+            lift.setVoltage(-speed*12);
         }
         if(controller.getXButtonReleased() || controller.getBButtonReleased()){
-            turret.setVoltage(0);
+            lift.setVoltage(0);
         }
     }
 

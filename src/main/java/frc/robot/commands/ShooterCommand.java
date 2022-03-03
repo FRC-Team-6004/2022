@@ -33,7 +33,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute()
   {
-    ShooterSubsystem.joystickShoot(RobotContainer.driveStick); //switch .joystickShootPID to .joystickShoot for voltage
+    m_subsystem.joystickShoot(RobotContainer.driveStick); //switch .joystickShootPID to .joystickShoot for voltage
   }
 
   // Called once the command ends or is interrupted.

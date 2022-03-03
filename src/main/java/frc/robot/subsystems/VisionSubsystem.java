@@ -11,11 +11,11 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 
 public class VisionSubsystem extends SubsystemBase {
-  public final double cameraHeight = Units.inchesToMeters(24); //change when measured
+  public     final double cameraHeight = Units.inchesToMeters(24); //change when measured
   public final double targetHeight = Units.feetToMeters(8.3);
   public final double cameraPitch = Units.degreesToRadians(0);
 
-  PhotonCamera camera = new PhotonCamera("photonvision");
+  PhotonCamera camera = new PhotonCamera("gloworm");
 
   public double distanceToTarget;
   public double yaw;
@@ -23,6 +23,10 @@ public class VisionSubsystem extends SubsystemBase {
   public void getDistance()
   {
     var result = camera.getLatestResult();
+
+    SmartDashboard.putNumber("targetCount", result.getTargets().size());
+    
+    SmartDashboard.putBoolean("hasTargets", result.hasTargets());
 
     if (result.hasTargets()) {
       distanceToTarget = 

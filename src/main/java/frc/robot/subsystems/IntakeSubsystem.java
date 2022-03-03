@@ -13,11 +13,11 @@ import com.revrobotics.RelativeEncoder;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    public static CANSparkMax pivot = new CANSparkMax(11, MotorType.kBrushless);
-    public static CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
-    public static RelativeEncoder pivotEncoder;
-    public static CANSparkMax intake = new CANSparkMax(13, MotorType.kBrushless); 
-    public static CANSparkMax intakeFollow = new CANSparkMax(14, MotorType.kBrushless);
+    public CANSparkMax pivot = new CANSparkMax(11, MotorType.kBrushless);
+    public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
+    public RelativeEncoder pivotEncoder;
+    public CANSparkMax intake = new CANSparkMax(13, MotorType.kBrushless); 
+    public CANSparkMax intakeFollow = new CANSparkMax(14, MotorType.kBrushless);
 
     public IntakeSubsystem() {
         pivotFollow.follow(pivot, true);
@@ -27,7 +27,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
 
-    public static void rotateIntake(XboxController controller)
+    public void rotateIntake(XboxController controller)
     {
         double angle = 0;
         if(controller.getYButton()){ angle = 0; } //arbitrary
@@ -43,7 +43,7 @@ public class IntakeSubsystem extends SubsystemBase {
         }        
 
     }
-    public static void IntakeManual(XboxController controller, double speed)
+    public void IntakeManual(XboxController controller, double speed)
     {
         //double MaxV = 11000/133.3; //12v
 

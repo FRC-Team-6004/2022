@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.subsystems.TurretSubsystem;
 //import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,8 +23,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   //private DriveTrainSubsystem driveTrainSubsystem;
-
-  private VisionSubsystem visionSubsystem;
 
   double startTime;
 
@@ -95,7 +92,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    visionSubsystem = new VisionSubsystem();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -108,8 +104,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    visionSubsystem.getDistance();
-    visionSubsystem.getYaw();
+
   }
 
   @Override
