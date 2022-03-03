@@ -6,21 +6,20 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class TurretCommand extends CommandBase {
+public class VisionCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final TurretSubsystem m_subsystem;
+  private final VisionSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TurretCommand(TurretSubsystem subsystem) {
+  public VisionCommand(VisionSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -34,8 +33,8 @@ public class TurretCommand extends CommandBase {
   @Override
   public void execute()
   {
-    TurretSubsystem.rotateTurretManual(RobotContainer.driveXboxController, .1);
-    //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
+    m_subsystem.getDistance();
+    m_subsystem.getYaw();
   }
 
   // Called once the command ends or is interrupted.

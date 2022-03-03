@@ -16,33 +16,33 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 public class DriveTrainSubsystem extends SubsystemBase {
   public DriveTrainSubsystem() {}
 
-  public static WPI_TalonFX Left1 = new WPI_TalonFX(1);
-  public static WPI_TalonFX Left2 = new WPI_TalonFX(2);
-  public static WPI_TalonFX Left3 = new WPI_TalonFX(3);
-  public static MotorControllerGroup Left = new MotorControllerGroup(Left1, Left2, Left3);
-  public static WPI_TalonFX Right1 = new WPI_TalonFX(4);
-  public static WPI_TalonFX Right2 = new WPI_TalonFX(5);
-  public static WPI_TalonFX Right3 = new WPI_TalonFX(6);
-  public static MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2, Right3);
-  public static DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
+  public WPI_TalonFX Left1 = new WPI_TalonFX(1);
+  public WPI_TalonFX Left2 = new WPI_TalonFX(2);
+  public WPI_TalonFX Left3 = new WPI_TalonFX(3);
+  public MotorControllerGroup Left = new MotorControllerGroup(Left1, Left2, Left3);
+  public WPI_TalonFX Right1 = new WPI_TalonFX(4);
+  public WPI_TalonFX Right2 = new WPI_TalonFX(5);
+  public WPI_TalonFX Right3 = new WPI_TalonFX(6);
+  public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2, Right3);
+  public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
 
   
  
   @Override
   public void periodic() {
   }
-  public static void drive()
+  public void drive()
   {
     Right.setInverted(true);
     Left.setInverted(false);
 
   }
-  public static void joystickDrive(Joystick stick, double speed)
+  public void joystickDrive(Joystick stick, double speed)
   {
     difDrive.arcadeDrive(stick.getY()*speed, stick.getTwist()*speed);
   }
 
-  public static void xboxControllerDrive(XboxController controller, double speed) 
+  public void xboxControllerDrive(XboxController controller, double speed) 
   {
     difDrive.tankDrive(controller.getLeftY()*speed, -controller.getRightY()*speed);
   }

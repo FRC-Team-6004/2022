@@ -18,21 +18,21 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ShooterSubsystem extends SubsystemBase {
-  public static CANSparkMax shooterLeft = new CANSparkMax(7, MotorType.kBrushless);
-  public static CANSparkMax shooterRight = new CANSparkMax(8, MotorType.kBrushless);
+  public CANSparkMax shooterLeft = new CANSparkMax(7, MotorType.kBrushless);
+  public CANSparkMax shooterRight = new CANSparkMax(8, MotorType.kBrushless);
   
-  private static RelativeEncoder encoderLeft;
-  private static RelativeEncoder encoderRight;
-  private static SparkMaxPIDController pidControllerLeft;
+  private RelativeEncoder encoderLeft;
+  private RelativeEncoder encoderRight;
+  private SparkMaxPIDController pidControllerLeft;
 
-  public static double kP;
-  public static double kI;
-  public static double kD;
-  public static double kIz;
-  public static double kFF;
-  public static double kMaxOutput;
-  public static double kMinOutput;
-  public static double maxRPM;
+  public double kP;
+  public double kI;
+  public double kD;
+  public double kIz;
+  public double kFF;
+  public double kMaxOutput;
+  public double kMinOutput;
+  public double maxRPM;
   
   public ShooterSubsystem() {
     shooterLeft.restoreFactoryDefaults();
@@ -85,7 +85,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
   }
 
-  public static void joystickShoot(Joystick stick)
+  public void joystickShoot(Joystick stick)
   {
 
     double slideVal = (-stick.getRawAxis(3)+1)/-2; // TODO: Fix this math
@@ -107,7 +107,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
   }
 
-  public static void joystickShootPID(Joystick stick) 
+  public void joystickShootPID(Joystick stick) 
   {
     double p = SmartDashboard.getNumber("P Gain", 0);
     double i = SmartDashboard.getNumber("I Gain", 0);
