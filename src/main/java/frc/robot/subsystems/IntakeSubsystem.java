@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -17,43 +18,54 @@ public class IntakeSubsystem extends SubsystemBase {
     public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
     public RelativeEncoder pivotEncoder;
     public CANSparkMax intake = new CANSparkMax(13, MotorType.kBrushless); 
-    public CANSparkMax intakeFollow = new CANSparkMax(14, MotorType.kBrushless);
+    double angle = 0;
+    boolean automaticControl = true;
 
     public IntakeSubsystem() {
         pivotFollow.follow(pivot, true);
-        intakeFollow.follow(intake, true);
+
+        pivot.setIdleMode(IdleMode.kBrake);
+        pivotFollow.setIdleMode(IdleMode.kBrake);
 
         pivotEncoder = pivot.getEncoder();
 
+        pivotEncoder.setPosition(0);
+
     }
 
-    public void rotateIntake(XboxController controller)
+    public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual)
     {
-        double angle = 0;
-        if(controller.getYButton()){ angle = 0; } //arbitrary
-        if(controller.getBButton()){ angle = 20; } //arbitrary
+        if(pivotUp){ angle = 0; }
+        if(pivotDown){ angle = 5.8; }
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
-        if(pivotEncoder.getPosition() > angle + 10){
-            //pivot.setVoltage(.2*12);
+        if(pivotUpManual || pivotDownManual){automaticControl = false;}
+        else if(pivotUp || pivotDown){automaticControl = true;}
+
+        if(automaticControl){
+            if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.1*12);}
+            else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.1*12);}
+            else{pivot.setVoltage(0);}     
         }
-        if(pivotEncoder.getPosition() < angle - 10){
-            //pivot.setVoltage(-.2*12);
-        }        
+        else{
+            if(pivotUpManual){pivot.setVoltage(0.1*12);}
+            else if(pivotDownManual){pivot.setVoltage(-0.1*12);}
+            else{pivot.setVoltage(0);}
+        }
 
     }
-    public void IntakeManual(XboxController controller, double speed)
+    public void IntakeManual(Boolean intakeIn, Boolean intakeOut)
     {
-        //double MaxV = 11000/133.3; //12v
+        double speed = 0.5;
 
-        if(controller.getLeftBumperPressed()){
+        if(intakeIn){
             intake.setVoltage(speed*12);
         }
-        else if(controller.getRightBumperPressed()){
+        else if(intakeOut){
             intake.setVoltage(-speed*12);
         }
-        if(controller.getLeftBumperPressed() || controller.getRightBumperPressed()){
+        if(intakeIn || intakeOut){
             intake.setVoltage(0);
         }
     }

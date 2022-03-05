@@ -13,13 +13,14 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.VisionCommand;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.IntakeSubsystem;
+
 /*
 import frc.robot.commands.DriveTrainCommand;
-import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.LiftCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 */
@@ -36,16 +37,15 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem;
   private final VisionCommand visionCommand;
   private final VisionSubsystem visionSubsystem;
-  
+  private final IntakeSubsystem intakeSubsystem;
+  private final IntakeCommand intakeCommand;
+
   /*
   private final ShooterSubsystem shooterSubsystem;
   private final DriveTrainSubsystem driveTrainSubsystem;
-  private final IntakeSubsystem intakeSubsystem;
   private final LiftSubsystem liftSubsystem;
-
   private final ShooterCommand shooterCommand;
   private final DriveTrainCommand driveTrainCommand;
-  private final IntakeCommand intakeCommand;
   private final LiftCommand liftCommand;
 
   */
@@ -59,27 +59,27 @@ public class RobotContainer {
     m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     visionSubsystem = new VisionSubsystem();
     visionCommand = new VisionCommand(visionSubsystem);
+    intakeSubsystem = new IntakeSubsystem();
+    intakeCommand = new IntakeCommand(intakeSubsystem);
     
     visionCommand.addRequirements(visionSubsystem);
     visionSubsystem.setDefaultCommand(visionCommand);
+    intakeCommand.addRequirements(intakeSubsystem);
+    intakeSubsystem.setDefaultCommand(intakeCommand);
 
     /*
     shooterSubsystem = new ShooterSubsystem();
     driveTrainSubsystem = new DriveTrainSubsystem();
-    intakeSubsystem = new IntakeSubsystem();
     liftSubsystem = new LiftSubsystem();
   
     shooterCommand = new ShooterCommand(shooterSubsystem);
     driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
-    intakeCommand = new IntakeCommand(intakeSubsystem);
     liftCommand = new LiftCommand(liftSubsystem);
 
     shooterCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterCommand);
     driveTrainCommand.addRequirements(driveTrainSubsystem);
     driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
-    intakeCommand.addRequirements(intakeSubsystem);
-    intakeSubsystem.setDefaultCommand(intakeCommand);
     liftCommand.addRequirements(liftSubsystem);
     liftSubsystem.setDefaultCommand(liftCommand);
 

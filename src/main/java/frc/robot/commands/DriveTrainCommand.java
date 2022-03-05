@@ -34,7 +34,7 @@ public class DriveTrainCommand extends CommandBase {
   @Override
   public void execute()
   {
-    m_subsystem.xboxControllerDrive(RobotContainer.driveXboxController, .4);
+    m_subsystem.xboxControllerDrive(RobotContainer.driveXboxController, true);
     //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
   }
 

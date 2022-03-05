@@ -8,6 +8,8 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -34,8 +36,9 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute()
   {
-    m_subsystem.rotateIntake(RobotContainer.driveXboxController);
-    m_subsystem.IntakeManual(RobotContainer.driveXboxController, .2);
+    Joystick stick = RobotContainer.driveStick;
+    m_subsystem.rotateIntake(stick.getRawButton(6),stick.getRawButton(4), (stick.getPOV() == 270), (stick.getPOV()== 90));
+    m_subsystem.IntakeManual((stick.getRawButton(7)||stick.getRawButton(9)),(stick.getRawButton(8)||stick.getRawButton(10)));
   }
 
   // Called once the command ends or is interrupted.

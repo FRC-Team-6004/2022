@@ -7,6 +7,8 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -33,7 +35,9 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute()
   {
-    m_subsystem.joystickShoot(RobotContainer.driveStick); //switch .joystickShootPID to .joystickShoot for voltage
+    Joystick stick = RobotContainer.driveStick;
+    XboxController cont = RobotContainer.driveXboxController;
+    m_subsystem.joystickShoot(cont.getBButton(),cont.getAButton(), stick.getTrigger()); //switch .joystickShootPID to .joystickShoot for voltage
   }
 
   // Called once the command ends or is interrupted.

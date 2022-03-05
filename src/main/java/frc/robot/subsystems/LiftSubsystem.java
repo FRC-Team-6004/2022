@@ -5,8 +5,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 //NOT IN USE
@@ -14,8 +16,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class LiftSubsystem extends SubsystemBase {
  
     public CANSparkMax lift = new CANSparkMax(10, MotorType.kBrushless); 
+    public RelativeEncoder liftEncoder;
 
-    public LiftSubsystem() {}
+    public LiftSubsystem() {
+        liftEncoder = lift.getEncoder();
+    }
 
     public void lift(float speed)
     {
@@ -24,6 +29,7 @@ public class LiftSubsystem extends SubsystemBase {
     public void liftManual(XboxController controller, double speed)
     {
         //double MaxV = 11000/133.3; //12v
+        SmartDashboard.putNumber("intakePivotEncoder", liftEncoder.getPosition());
 
         if(controller.getXButtonPressed()){
             lift.setVoltage(speed*12);
