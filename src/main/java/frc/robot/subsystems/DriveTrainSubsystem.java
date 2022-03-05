@@ -25,9 +25,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public WPI_TalonFX Right3 = new WPI_TalonFX(6);
   public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2, Right3);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
+  double speed;
+  boolean enableManual;
 
-  
- 
   @Override
   public void periodic() {
   }
@@ -37,18 +37,27 @@ public class DriveTrainSubsystem extends SubsystemBase {
     Left.setInverted(false);
 
   }
-  public void joystickDrive(Joystick stick, double speed)
+  public void xboxControllerDrive(Double leftY, Double rightY, Boolean slow, Boolean vision) 
   {
-    difDrive.arcadeDrive(stick.getY()*speed, stick.getTwist()*speed);
-  }
+    if(vision){enableManual = false;}
+    else{enableManual = true;}
+    if(enableManual){
+      if(slow){speed = .35;}
+      else{speed = .75;}
 
-  public void xboxControllerDrive(XboxController controller, double speed) 
-  {
-    difDrive.tankDrive(controller.getLeftY()*speed, -controller.getRightY()*speed);
+      difDrive.tankDrive(leftY*speed, -rightY*speed);
+    }
+    if(vision){
+      speed = .6;
+      difDrive.tankDrive(VisionSubsystem.aim(),-VisionSubsystem.aim());
+    }
   }
   public void driveTank(double leftSpeed, double rightSpeed) 
   {
     difDrive.tankDrive(leftSpeed, -rightSpeed);
+  }
+  public void alignToTarget() {
+    
   }
   @Override
   public void simulationPeriodic() {

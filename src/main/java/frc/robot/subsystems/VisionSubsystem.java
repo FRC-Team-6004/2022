@@ -18,7 +18,7 @@ public class VisionSubsystem extends SubsystemBase {
   PhotonCamera camera = new PhotonCamera("gloworm");
 
   public double distanceToTarget;
-  public double yaw;
+  public static double yaw;
 
   public void getDistance()
   {
@@ -48,7 +48,23 @@ public class VisionSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("yaw", yaw);
     }
   }
+  
+  public static double aim() {
+    double turn = 0;
+    if(yaw > 25){turn = 1;}
+    else if(yaw < -25){turn = -1;}
+    else if(yaw > 12.5){turn = .75;}
+    else if(yaw < -12.5){turn = -.75;}
+    else if(yaw > 6.25){turn = .5;}
+    else if(yaw < -6.25){turn = -.5;}
+    else if(yaw > 3.125){turn = .25;}
+    else if(yaw < -3.125){turn = -.25;}
+    else if(yaw > 1.5625){turn = .15;}
+    else if(yaw < -1.5625){turn = -.15;}
+    else{turn = 0;}
+    return turn;
 
+  }
   
   public VisionSubsystem() {}
  

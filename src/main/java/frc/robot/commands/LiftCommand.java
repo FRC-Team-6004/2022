@@ -8,6 +8,7 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 //NOT IN USE
@@ -15,14 +16,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class LiftCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final TurretSubsystem m_subsystem;
+  private final LiftSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LiftCommand(TurretSubsystem subsystem) {
+  public LiftCommand(LiftSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -36,8 +37,8 @@ public class LiftCommand extends CommandBase {
   @Override
   public void execute()
   {
-    m_subsystem.rotateTurretManual(RobotContainer.driveXboxController, .1);
-    //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
+    Joystick stick = RobotContainer.driveStick;
+    m_subsystem.liftControl((stick.getRawButton(11)||stick.getRawButton(9)),(stick.getRawButton(12)||stick.getRawButton(10)),(stick.getPOV()==0),(stick.getPOV()==180));
   }
 
   // Called once the command ends or is interrupted.
