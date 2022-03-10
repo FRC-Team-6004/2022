@@ -20,6 +20,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class ShooterSubsystem extends SubsystemBase {
   public CANSparkMax shooterLeft = new CANSparkMax(7, MotorType.kBrushless);
   public CANSparkMax shooterRight = new CANSparkMax(8, MotorType.kBrushless);
+  public CANSparkMax magazine = new CANSparkMax(9, MotorType.kBrushless); //ID needed
   
   private RelativeEncoder encoderLeft;
   
@@ -41,8 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
   }
 
-  public void joystickShoot(Boolean low, Boolean high, Boolean shoot)
-  {
+  public void joystickShoot(Boolean low, Boolean high, Boolean shoot){
     double lowPower = .4; //arbitrary
     double highPower = .8; //arbitrary
     if(low && shoot){shooterLeft.setVoltage(lowPower*12);}
@@ -50,6 +50,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("shooter encoder", encoderLeft.getVelocity());
     
+  }
+
+  public void shoot(double speed){
+    shooterLeft.setVoltage(speed*12);
+  }
+
+  public void magazineManual(double speed){
+    magazine.setVoltage(speed*12);
   }
 
   @Override

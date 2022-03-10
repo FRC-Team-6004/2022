@@ -38,7 +38,7 @@ public class LiftCommand extends CommandBase {
   public void execute()
   {
     Joystick stick = RobotContainer.driveStick;
-    m_subsystem.liftControl((stick.getRawButton(11)||stick.getRawButton(9)),(stick.getRawButton(12)||stick.getRawButton(10)),(stick.getPOV()==0),(stick.getPOV()==180));
+    m_subsystem.liftControl(stick.getRawButton(6),stick.getRawButton(4),(stick.getPOV()==0),(stick.getPOV()==180));
   }
 
   // Called once the command ends or is interrupted.

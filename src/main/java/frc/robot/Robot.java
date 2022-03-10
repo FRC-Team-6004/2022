@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-//import frc.robot.subsystems.TurretSubsystem;
-//import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -80,6 +79,16 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     double time = Timer.getFPGATimestamp();
+
+    //Shoot at fixed speed to get to highport then exit TARMAC
+      
+    if(time > 0 && time < 5){ShooterSubsystem.shoot(speed);} //speed to get in from distance   
+    if(time > 3 && time < 5){ShooterSubsystem.magazineManual(.2);}
+    if(time > 5){ShooterSubsystem.shoot(0); ShooterSubsystem.magazineManual(0);}
+
+    if(time > 6 && time < 7){DriveTrainSubsystem.driveTank(-.5, -.5);}
+    if(time > 7){DriveTrainSubsystem.drive(0, 0);}
+
     /*
     if (time - startTime < 2) {
       driveTrainSubsystem.driveTank(.5, .5);
