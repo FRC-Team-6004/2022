@@ -37,13 +37,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
     Left.setInverted(false);
 
   }
-  public void xboxControllerDrive(Double leftY, Double rightY, Boolean slow, Boolean vision) 
-  {
+  public void xboxControllerDrive(Double leftY, Double rightY, Boolean slow, Boolean fast, Boolean vision){ 
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(slow){speed = .35;}
-      else{speed = .75;}
+      if(slow){speed = .25;}
+      else if(fast){speed = .75;}
+      else{speed = .5;}
 
       difDrive.tankDrive(leftY*speed, -rightY*speed);
     }

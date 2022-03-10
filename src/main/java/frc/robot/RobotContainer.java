@@ -9,21 +9,21 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.VisionCommand;
 import frc.robot.subsystems.VisionSubsystem;
+
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 
-/*
 import frc.robot.commands.DriveTrainCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.LiftCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+
+import frc.robot.commands.LiftCommand;
 import frc.robot.subsystems.LiftSubsystem;
-*/
+
+import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.ShooterSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,14 +33,11 @@ import frc.robot.subsystems.LiftSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleCommand m_autoCommand;
-  private final ExampleSubsystem m_exampleSubsystem;
   private final VisionCommand visionCommand;
   private final VisionSubsystem visionSubsystem;
   private final IntakeSubsystem intakeSubsystem;
   private final IntakeCommand intakeCommand;
 
-  /*
   private final ShooterSubsystem shooterSubsystem;
   private final DriveTrainSubsystem driveTrainSubsystem;
   private final LiftSubsystem liftSubsystem;
@@ -48,34 +45,27 @@ public class RobotContainer {
   private final DriveTrainCommand driveTrainCommand;
   private final LiftCommand liftCommand;
 
-  */
   public static Joystick driveStick;
   public static XboxController driveXboxController;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_exampleSubsystem = new ExampleSubsystem();
-    m_autoCommand = new ExampleCommand(m_exampleSubsystem);
     visionSubsystem = new VisionSubsystem();
     visionCommand = new VisionCommand(visionSubsystem);
     intakeSubsystem = new IntakeSubsystem();
     intakeCommand = new IntakeCommand(intakeSubsystem);
+    shooterSubsystem = new ShooterSubsystem();
+    shooterCommand = new ShooterCommand(shooterSubsystem);
+    driveTrainSubsystem = new DriveTrainSubsystem();
+    driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
+    liftSubsystem = new LiftSubsystem();
+    liftCommand = new LiftCommand(liftSubsystem);
     
     visionCommand.addRequirements(visionSubsystem);
     visionSubsystem.setDefaultCommand(visionCommand);
     intakeCommand.addRequirements(intakeSubsystem);
     intakeSubsystem.setDefaultCommand(intakeCommand);
-
-    /*
-    shooterSubsystem = new ShooterSubsystem();
-    driveTrainSubsystem = new DriveTrainSubsystem();
-    liftSubsystem = new LiftSubsystem();
-  
-    shooterCommand = new ShooterCommand(shooterSubsystem);
-    driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
-    liftCommand = new LiftCommand(liftSubsystem);
-
     shooterCommand.addRequirements(shooterSubsystem);
     shooterSubsystem.setDefaultCommand(shooterCommand);
     driveTrainCommand.addRequirements(driveTrainSubsystem);
@@ -83,7 +73,7 @@ public class RobotContainer {
     liftCommand.addRequirements(liftSubsystem);
     liftSubsystem.setDefaultCommand(liftCommand);
 
-    */
+    
     driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();
@@ -107,8 +97,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
+  
 }

@@ -18,27 +18,42 @@ public class LiftSubsystem extends SubsystemBase {
     public CANSparkMax lift = new CANSparkMax(10, MotorType.kBrushless); 
     public RelativeEncoder liftEncoder;
 
+    double angle;
+    boolean automaticControl;
+
     public LiftSubsystem() {
         liftEncoder = lift.getEncoder();
+
+        liftEncoder.setPosition(0);
+        angle = 0;
     }
 
     public void lift(float speed)
     {
         lift.setVoltage(speed*12);
     }
-    public void liftManual(XboxController controller, double speed)
+    public void liftControl(boolean liftUp, boolean liftDown, boolean liftUpManual, boolean liftDownManual)
     {
-        //double MaxV = 11000/133.3; //12v
+        double speed = 0.5;
         SmartDashboard.putNumber("intakePivotEncoder", liftEncoder.getPosition());
 
-        if(controller.getXButtonPressed()){
-            lift.setVoltage(speed*12);
+        if(liftUp){ angle = 0; } //arbitrary
+        //if(liftDown){ angle = 5.8; } //arbitrary
+
+        if(liftUpManual || liftDownManual || liftDown){automaticControl = false;}
+        else if(liftUp){automaticControl = true;}
+
+        if(automaticControl){
+            /*
+            if(liftEncoder.getPosition() < angle - 0.5){lift.setVoltage(.1*12);}
+            else if(liftEncoder.getPosition() > angle + 0.5){lift.setVoltage(-.1*12);}
+            else{lift.setVoltage(0);}   
+            */
         }
-        else if(controller.getBButtonPressed()){
-            lift.setVoltage(-speed*12);
-        }
-        if(controller.getXButtonReleased() || controller.getBButtonReleased()){
-            lift.setVoltage(0);
+        else{
+            if(liftUpManual){lift.setVoltage(speed*12);}
+            else if(liftDownManual || liftDown){lift.setVoltage(-speed*12);}
+            else{lift.setVoltage(0);}
         }
     }
 

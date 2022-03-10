@@ -38,6 +38,12 @@ public class ShooterCommand extends CommandBase {
     Joystick stick = RobotContainer.driveStick;
     XboxController cont = RobotContainer.driveXboxController;
     m_subsystem.joystickShoot(cont.getBButton(),cont.getAButton(), stick.getTrigger()); //switch .joystickShootPID to .joystickShoot for voltage
+    double magazineSpeed;
+    if((stick.getRawButton(11)||stick.getRawButton(9))){magazineSpeed = .2;}
+    else if((stick.getRawButton(12)||stick.getRawButton(10))){magazineSpeed = -.2;}
+    else{magazineSpeed=0;}
+
+    m_subsystem.magazineManual(magazineSpeed);
   }
 
   // Called once the command ends or is interrupted.

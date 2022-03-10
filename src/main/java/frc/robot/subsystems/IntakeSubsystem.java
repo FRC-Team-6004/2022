@@ -30,13 +30,14 @@ public class IntakeSubsystem extends SubsystemBase {
         pivotEncoder = pivot.getEncoder();
 
         pivotEncoder.setPosition(0);
+        angle = 0;
 
     }
 
     public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual)
     {
         if(pivotUp){ angle = 0; }
-        if(pivotDown){ angle = 5.8; }
+        if(pivotDown){ angle = 5.9; }
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
@@ -60,12 +61,12 @@ public class IntakeSubsystem extends SubsystemBase {
         double speed = 0.5;
 
         if(intakeIn){
-            intake.setVoltage(speed*12);
-        }
-        else if(intakeOut){
             intake.setVoltage(-speed*12);
         }
-        if(intakeIn || intakeOut){
+        else if(intakeOut){
+            intake.setVoltage(speed*12);
+        }
+        else{
             intake.setVoltage(0);
         }
     }

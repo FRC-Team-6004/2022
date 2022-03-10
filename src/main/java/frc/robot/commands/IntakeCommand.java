@@ -10,6 +10,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -17,12 +18,18 @@ public class IntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_subsystem;
 
+  boolean pivotUp = false;
+  boolean pivotDown = false;
+  boolean intakeIn = false;
+  boolean intakeOut = false;
+
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
   public IntakeCommand(IntakeSubsystem subsystem) {
+
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -37,8 +44,24 @@ public class IntakeCommand extends CommandBase {
   public void execute()
   {
     Joystick stick = RobotContainer.driveStick;
-    m_subsystem.rotateIntake(stick.getRawButton(6),stick.getRawButton(4), (stick.getPOV() == 270), (stick.getPOV()== 90));
-    m_subsystem.IntakeManual((stick.getRawButton(7)||stick.getRawButton(9)),(stick.getRawButton(8)||stick.getRawButton(10)));
+
+    if(stick.getRawButtonPressed(5)){pivotUp = true;}
+    else if(stick.getRawButtonPressed(3)){pivotDown = true;}
+
+    if(stick.getRawButtonReleased(5)){pivotUp = false;}
+    else if(stick.getRawButtonReleased(3)){pivotDown = false;}
+
+    if((stick.getRawButtonPressed(7)||stick.getRawButtonPressed(9))){intakeIn = true;}
+    else if((stick.getRawButtonPressed(8)||stick.getRawButtonPressed(10))){intakeOut = true;}
+
+    if((stick.getRawButtonReleased(7)||stick.getRawButtonReleased(9))){intakeIn = false;}
+    else if((stick.getRawButtonReleased(8)||stick.getRawButtonReleased(10))){intakeOut = false;}
+
+    SmartDashboard.putBoolean("intakeIn", intakeIn);
+    SmartDashboard.putBoolean("intakeOut", intakeOut);
+
+    m_subsystem.rotateIntake(pivotUp,pivotDown, (stick.getPOV() == 270), (stick.getPOV()== 90));
+    m_subsystem.IntakeManual(intakeIn,intakeOut);
   }
 
   // Called once the command ends or is interrupted.
