@@ -4,12 +4,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 
@@ -25,6 +22,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public WPI_TalonFX Right3 = new WPI_TalonFX(6);
   public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2, Right3);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
+
   double speed;
   boolean enableManual;
 
@@ -38,10 +36,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   }
   public void xboxControllerDrive(Double leftY, Double rightY, Boolean slow, Boolean fast, Boolean vision){ 
+    
+
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(slow){speed = .25;}
+      if(slow){speed = .35;}
       else if(fast){speed = .75;}
       else{speed = .5;}
 

@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -58,7 +57,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     public void IntakeManual(Boolean intakeIn, Boolean intakeOut)
     {
-        double speed = 0.5;
+        double speed = 1;
 
         if(intakeIn){
             intake.setVoltage(-speed*12);

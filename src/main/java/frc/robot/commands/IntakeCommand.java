@@ -4,12 +4,9 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -45,6 +42,7 @@ public class IntakeCommand extends CommandBase {
   {
     Joystick stick = RobotContainer.driveStick;
 
+    /*
     if(stick.getRawButtonPressed(5)){pivotUp = true;}
     else if(stick.getRawButtonPressed(3)){pivotDown = true;}
 
@@ -56,6 +54,17 @@ public class IntakeCommand extends CommandBase {
 
     if((stick.getRawButtonReleased(7)||stick.getRawButtonReleased(9))){intakeIn = false;}
     else if((stick.getRawButtonReleased(8)||stick.getRawButtonReleased(10))){intakeOut = false;}
+    */
+    if((stick.getRawButton(5))){pivotUp = true;}
+    else{pivotUp = false;}
+    if((stick.getRawButton(3))){pivotDown = true;}
+    else{pivotDown = false;}
+
+    if((stick.getRawButton(7))||(stick.getRawButton(9))){intakeIn = true;}
+    else{intakeIn = false;}
+    if((stick.getRawButton(8))||(stick.getRawButton(10))){intakeOut = true;}
+    else{intakeOut = false;}
+
 
     SmartDashboard.putBoolean("intakeIn", intakeIn);
     SmartDashboard.putBoolean("intakeOut", intakeOut);
