@@ -4,9 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -33,7 +31,7 @@ public class DriveTrainCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute()
+  public void execute() 
   {
     XboxController controller = RobotContainer.driveXboxController;
     m_subsystem.xboxControllerDrive(controller.getLeftY(), controller.getRightY(), (controller.getLeftTriggerAxis() > 0.2 ), controller.getLeftBumper(), (controller.getRightTriggerAxis() > 0.2 ));

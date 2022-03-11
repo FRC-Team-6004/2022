@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -35,7 +34,7 @@ public class LiftSubsystem extends SubsystemBase {
     public void liftControl(boolean liftUp, boolean liftDown, boolean liftUpManual, boolean liftDownManual)
     {
         double speed = 0.5;
-        SmartDashboard.putNumber("intakePivotEncoder", liftEncoder.getPosition());
+        SmartDashboard.putNumber("liftEncoder", liftEncoder.getPosition());
 
         if(liftUp){ angle = 0; } //arbitrary
         //if(liftDown){ angle = 5.8; } //arbitrary

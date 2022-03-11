@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,6 +22,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  public DriveTrainSubsystem driveTrainSubsystem;
+  public IntakeSubsystem intakeSubsystem;
+  public ShooterSubsystem shooterSubsystem;
 
   //private DriveTrainSubsystem driveTrainSubsystem;
 
@@ -80,23 +86,15 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     double time = Timer.getFPGATimestamp();
 
-    //Shoot at fixed speed to get to highport then exit TARMAC
+    //Shoot at fixed speed to get to high port then exit TARMAC
       
-    if(time > 0 && time < 5){ShooterSubsystem.shoot(speed);} //speed to get in from distance   
-    if(time > 3 && time < 5){ShooterSubsystem.magazineManual(.2);}
-    if(time > 5){ShooterSubsystem.shoot(0); ShooterSubsystem.magazineManual(0);}
+    if(time > 0 && time < 5){shooterSubsystem.shoot(.5);} //speed to get in from distance   
+    if(time > 3 && time < 5){shooterSubsystem.magazineManual(.2);}
+    if(time > 5){shooterSubsystem.shoot(0); shooterSubsystem.magazineManual(0);}
 
-    if(time > 6 && time < 7){DriveTrainSubsystem.driveTank(-.5, -.5);}
-    if(time > 7){DriveTrainSubsystem.drive(0, 0);}
+    if(time > 6 && time < 7){driveTrainSubsystem.driveTank(-.5, -.5);}
+    if(time > 7){driveTrainSubsystem.driveTank(0, 0);} 
 
-    /*
-    if (time - startTime < 2) {
-      driveTrainSubsystem.driveTank(.5, .5);
-    }
-    else {
-      driveTrainSubsystem.driveTank(0, 0);
-    }
-    */
   }
 
   @Override

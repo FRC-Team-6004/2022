@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
