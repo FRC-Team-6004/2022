@@ -73,7 +73,9 @@ public class Robot extends TimedRobot {
 
     startTime = Timer.getFPGATimestamp();
 
-    //driveTrainSubsystem = new DriveTrainSubsystem();
+    driveTrainSubsystem = new DriveTrainSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
+    shooterSubsystem = new ShooterSubsystem();
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

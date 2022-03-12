@@ -54,7 +54,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   public void driveTank(double leftSpeed, double rightSpeed) 
   {
-    difDrive.tankDrive(leftSpeed, -rightSpeed);
+    difDrive.tankDrive(-leftSpeed, rightSpeed);
   }
   public void alignToTarget() {
     

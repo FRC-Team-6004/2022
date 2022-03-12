@@ -57,7 +57,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     public void IntakeManual(Boolean intakeIn, Boolean intakeOut)
     {
-        double speed = 1;
+        double speed = .5;
 
         if(intakeIn){
             intake.setVoltage(-speed*12);
