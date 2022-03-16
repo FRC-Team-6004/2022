@@ -41,9 +41,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(slow){speed = .35;}
-      else if(fast){speed = .75;}
-      else{speed = .5;}
+      if(slow){speed = -.35;}
+      else if(fast){speed = -.6;}
+      else{speed = -.4;}
 
       difDrive.tankDrive(leftY*speed, -rightY*speed);
     }
@@ -54,7 +54,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   public void driveTank(double leftSpeed, double rightSpeed) 
   {
-    difDrive.tankDrive(-leftSpeed, rightSpeed);
+    difDrive.tankDrive(leftSpeed, -rightSpeed);
   }
   public void alignToTarget() {
     

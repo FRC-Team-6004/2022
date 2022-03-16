@@ -70,7 +70,7 @@ public class IntakeCommand extends CommandBase {
     SmartDashboard.putBoolean("intakeOut", intakeOut);
 
     m_subsystem.rotateIntake(pivotUp,pivotDown, (stick.getPOV() == 270), (stick.getPOV()== 90));
-    m_subsystem.IntakeManual(intakeIn,intakeOut);
+    m_subsystem.IntakeManual(intakeIn,intakeOut,stick.getRawAxis(3));
   }
 
   // Called once the command ends or is interrupted.

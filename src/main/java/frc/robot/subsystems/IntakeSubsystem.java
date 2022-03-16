@@ -14,17 +14,17 @@ import com.revrobotics.CANSparkMax.IdleMode;
 public class IntakeSubsystem extends SubsystemBase {
 
     public CANSparkMax pivot = new CANSparkMax(11, MotorType.kBrushless);
-    public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
+    //public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
     public RelativeEncoder pivotEncoder;
-    public CANSparkMax intake = new CANSparkMax(13, MotorType.kBrushless); 
+    public CANSparkMax intake = new CANSparkMax(13,MotorType.kBrushless); 
     double angle = 0;
     boolean automaticControl = true;
 
     public IntakeSubsystem() {
-        pivotFollow.follow(pivot, true);
+        //pivotFollow.follow(pivot, true);
 
         pivot.setIdleMode(IdleMode.kBrake);
-        pivotFollow.setIdleMode(IdleMode.kBrake);
+        //pivotFollow.setIdleMode(IdleMode.kBrake);
 
         pivotEncoder = pivot.getEncoder();
 
@@ -44,20 +44,20 @@ public class IntakeSubsystem extends SubsystemBase {
         else if(pivotUp || pivotDown){automaticControl = true;}
 
         if(automaticControl){
-            if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.1*12);}
-            else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.1*12);}
+            if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.3*12);}
+            else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.3*12);}
             else{pivot.setVoltage(0);}     
         }
         else{
-            if(pivotUpManual){pivot.setVoltage(0.1*12);}
-            else if(pivotDownManual){pivot.setVoltage(-0.1*12);}
+            if(pivotUpManual){pivot.setVoltage(0.3*12);}
+            else if(pivotDownManual){pivot.setVoltage(-.3*12);}
             else{pivot.setVoltage(0);}
         }
 
     }
-    public void IntakeManual(Boolean intakeIn, Boolean intakeOut)
+    public void IntakeManual(Boolean intakeIn, Boolean intakeOut, double speed)
     {
-        double speed = .5;
+        //double speed = .4;
 
         if(intakeIn){
             intake.setVoltage(-speed*12);
