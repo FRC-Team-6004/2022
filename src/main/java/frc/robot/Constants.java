@@ -14,7 +14,6 @@ package frc.robot;
  */
 public final class Constants {
 
-  // test
 
   //Lemon light stuf
   public static final double KNOWN_DISTANCE = 161.3; //inches
@@ -23,6 +22,7 @@ public final class Constants {
   public static final double FOCAL_LENGTH = ( KNOWN_DISTANCE * PIXEL_WIDTH_KNOWN) / KNOWN_TAPE_BOUND_WIDTH;
   public static final double GEAR_RATIO = 10.81/1.0;
   public static final double GRAVITY = 386.09; // inches/ sec ^2
+
 
   
 }

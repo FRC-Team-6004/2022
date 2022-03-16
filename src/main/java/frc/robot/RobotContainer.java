@@ -5,11 +5,28 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import frc.robot.commands.VisionCommand;
+import frc.robot.subsystems.VisionSubsystem;
+
+import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.IntakeSubsystem;
+
+import frc.robot.commands.DriveTrainCommand;
+import frc.robot.subsystems.DriveTrainSubsystem;
+
+import frc.robot.commands.LiftCommand;
+import frc.robot.subsystems.LiftSubsystem;
+
+import frc.robot.commands.ShooterCommand;
+import frc.robot.subsystems.ShooterSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -19,14 +36,60 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final ExampleSubsystem exampleSubsystem;
+  private final DriveTrainSubsystem driveTrainSubsystem;
+  private final ShooterSubsystem shooterSubsystem;
+  private final IntakeSubsystem intakeSubsystem;
+  private final LiftSubsystem liftSubsystem;
+  private final VisionSubsystem visionSubsystem;
+  
+  private final ExampleCommand exampleCommand;
+  private final DriveTrainCommand driveTrainCommand;
+  private final IntakeCommand intakeCommand;
+  private final ShooterCommand shooterCommand;
+  private final LiftCommand liftCommand;
+  private final VisionCommand visionCommand;
+
+  public static Joystick driveStick;
+  public static XboxController driveXboxController;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    exampleSubsystem = new ExampleSubsystem();
+    exampleCommand = new ExampleCommand(exampleSubsystem);
+    driveTrainSubsystem = new DriveTrainSubsystem();
+    driveTrainCommand = new DriveTrainCommand(driveTrainSubsystem);
+    intakeSubsystem = new IntakeSubsystem();
+    intakeCommand = new IntakeCommand(intakeSubsystem);
+    shooterSubsystem = new ShooterSubsystem();
+    shooterCommand = new ShooterCommand(shooterSubsystem);
+    liftSubsystem = new LiftSubsystem();
+    liftCommand = new LiftCommand(liftSubsystem);
+    visionSubsystem = new VisionSubsystem();
+    visionCommand = new VisionCommand(visionSubsystem);
+
+    exampleCommand.addRequirements(exampleSubsystem);
+    exampleSubsystem.setDefaultCommand(exampleCommand);
+    driveTrainCommand.addRequirements(driveTrainSubsystem);
+    driveTrainSubsystem.setDefaultCommand(driveTrainCommand);
+    intakeCommand.addRequirements(intakeSubsystem);
+    intakeSubsystem.setDefaultCommand(intakeCommand);
+    shooterCommand.addRequirements(shooterSubsystem);
+    shooterSubsystem.setDefaultCommand(shooterCommand);
+    liftCommand.addRequirements(liftSubsystem);
+    liftSubsystem.setDefaultCommand(liftCommand);
+    visionCommand.addRequirements(visionSubsystem);
+    visionSubsystem.setDefaultCommand(visionCommand);
+
+    driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();
+
+    driveXboxController = new XboxController(1);
+
   }
 
   /**
@@ -35,15 +98,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
+  
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return exampleCommand;
   }
+  
 }
