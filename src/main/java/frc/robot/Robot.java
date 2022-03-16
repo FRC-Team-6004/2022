@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     shooterSubsystem.shoot(.65);
     Timer.delay(3);
     shooterSubsystem.magazineManual(.2);
-    Timer.delay(2);
+    Timer.delay(5);
     shooterSubsystem.shoot(0); 
     shooterSubsystem.magazineManual(0);
    // Timer.delay(1);
