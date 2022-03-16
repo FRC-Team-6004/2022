@@ -14,7 +14,6 @@ package frc.robot;
  */
 public final class Constants {
 
-  // test
 
   //Lemon light stuf
   public static final double KNOWN_DISTANCE = 161.3; //inches
