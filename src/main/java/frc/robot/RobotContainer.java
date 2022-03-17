@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.ExampleCommand;
@@ -50,8 +50,9 @@ public class RobotContainer {
   final LiftCommand liftCommand;
   final VisionCommand visionCommand;
 
+  public static Joystick operatorStick;
   public static Joystick driveStick;
-  public static XboxController driveXboxController;
+  //public static XboxController driveXboxController;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -83,11 +84,12 @@ public class RobotContainer {
     visionCommand.addRequirements(visionSubsystem);
     visionSubsystem.setDefaultCommand(visionCommand);
 
+    operatorStick = new Joystick(1);
     driveStick = new Joystick(0);
     // Configure the button bindings
     configureButtonBindings();
 
-    driveXboxController = new XboxController(1);
+    //driveXboxController = new XboxController(1);
 
   }
 

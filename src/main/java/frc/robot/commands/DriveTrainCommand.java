@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -33,8 +34,10 @@ public class DriveTrainCommand extends CommandBase {
   @Override
   public void execute() 
   {
-    XboxController controller = RobotContainer.driveXboxController;
-    m_subsystem.xboxControllerDrive(controller.getLeftY(), controller.getRightY(), (controller.getLeftTriggerAxis() > 0.2 ), controller.getLeftBumper(), (controller.getRightTriggerAxis() > 0.2 ));
+    Joystick drStick = RobotContainer.driveStick;
+    m_subsystem.joystickDrive(drStick.getY(), drStick.getTwist(), drStick.getRawButton(1), drStick.getRawButton(2));
+    //XboxController controller = RobotContainer.driveXboxController;
+    //m_subsystem.xboxControllerDrive(controller.getLeftY(), controller.getRightY(), (controller.getLeftTriggerAxis() > 0.2 ), controller.getLeftBumper(), (controller.getRightTriggerAxis() > 0.2 ));
     //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
   }
 

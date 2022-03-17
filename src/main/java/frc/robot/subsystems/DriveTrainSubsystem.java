@@ -35,17 +35,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
     Left.setInverted(false);
 
   }
-  public void xboxControllerDrive(Double leftY, Double rightY, Boolean slow, Boolean fast, Boolean vision){ 
+  public void joystickDrive(Double speed, Double turn, Boolean fast, Boolean vision){ 
     
 
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(slow){speed = -.35;}
-      else if(fast){speed = -.6;}
+      if(fast){speed = -.6;}
       else{speed = -.4;}
 
-      difDrive.tankDrive(leftY*speed, -rightY*speed);
+      difDrive.arcadeDrive(speed, turn);
     }
     if(vision){
       speed = .6;
