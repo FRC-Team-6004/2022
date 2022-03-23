@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   private DriveTrainCommand driveTrainCommand;
   
   
-  public DriveTrainSubsystem driveTrainSubsystem;
+  public static DriveTrainSubsystem driveTrainSubsystem;
   public IntakeSubsystem intakeSubsystem;
   public ShooterSubsystem shooterSubsystem;
 
@@ -80,8 +80,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();  
-
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     //driveTrainSubsystem = m_robotContainer.driveTrainSubsystem;
     intakeSubsystem = m_robotContainer.intakeSubsystem;
     shooterSubsystem = m_robotContainer.shooterSubsystem;
