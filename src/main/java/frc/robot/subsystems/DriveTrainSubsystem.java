@@ -58,7 +58,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   @Override
   public void simulationPeriodic() {
-  } 
+  }
+  public void resetDriveEncoder() {
+  }
+  public void arcadeDrive(double d, double e) {
+  }
+public double getDriveEncoderDistance() {
+    return 0;
+} 
 
 
 }
