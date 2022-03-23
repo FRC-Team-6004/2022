@@ -51,16 +51,17 @@ public class VisionSubsystem extends SubsystemBase {
   
   public static double aim() {
     double turn = 0;
+    double speed = 1;
     if(yaw > 25){turn = 1;}
-    else if(yaw < -25){turn = -1;}
-    else if(yaw > 12.5){turn = .75;}
-    else if(yaw < -12.5){turn = -.75;}
-    else if(yaw > 6.25){turn = .5;}
-    else if(yaw < -6.25){turn = -.5;}
-    else if(yaw > 3.125){turn = .25;}
-    else if(yaw < -3.125){turn = -.25;}
-    else if(yaw > 1.5625){turn = .15;}
-    else if(yaw < -1.5625){turn = -.15;}
+    else if(yaw < -25){turn = -1*speed;}
+    else if(yaw > 12.5){turn = .75*speed;}
+    else if(yaw < -12.5){turn = -.75*speed;}
+    else if(yaw > 6.25){turn = .5*speed;}
+    else if(yaw < -6.25){turn = -.5*speed;}
+    else if(yaw > 3.125){turn = .25*speed;}
+    else if(yaw < -3.125){turn = -.25*speed;}
+    else if(yaw > 1.5625){turn = .15*speed;}
+    else if(yaw < -1.5625){turn = -.15*speed;}
     else{turn = 0;}
     return turn;
 

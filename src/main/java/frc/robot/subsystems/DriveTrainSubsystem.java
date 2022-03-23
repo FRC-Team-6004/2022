@@ -15,12 +15,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public WPI_TalonFX Left1 = new WPI_TalonFX(1);
   public WPI_TalonFX Left2 = new WPI_TalonFX(2);
-  public WPI_TalonFX Left3 = new WPI_TalonFX(3);
-  public MotorControllerGroup Left = new MotorControllerGroup(Left1, Left2, Left3);
-  public WPI_TalonFX Right1 = new WPI_TalonFX(4);
-  public WPI_TalonFX Right2 = new WPI_TalonFX(5);
-  public WPI_TalonFX Right3 = new WPI_TalonFX(6);
-  public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2, Right3);
+  public MotorControllerGroup Left = new MotorControllerGroup(Left1, Left2);
+  public WPI_TalonFX Right1 = new WPI_TalonFX(3);
+  public WPI_TalonFX Right2 = new WPI_TalonFX(4);
+  public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
 
   double speed;
