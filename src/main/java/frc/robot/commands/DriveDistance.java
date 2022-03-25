@@ -10,7 +10,6 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotPreferences;//?????????????
 
 /** An example command that uses an example subsystem. */
 public class DriveDistance extends Command {
@@ -19,21 +18,21 @@ public class DriveDistance extends Command {
     private RobotContainer robotContainer;
     private DriveTrainSubsystem driveTrainSubsystem;
 
-    public DriveDistance(double feet) {
+    public DriveDistance(double inches) {
       //requires(Robot.driveTrainSubsystem);
-      distance = feet;
+      distance = inches;
     }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.driveTrainSubsystem.resetDriveEncoder();
+    robotContainer.driveTrainSubsystem.resetDriveEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrainSubsystem.arcadeDrive(0.0, 0.0);
+    robotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0.0);
   }
 
   // Called once the command ends or is interrupted.
@@ -46,7 +45,7 @@ public class DriveDistance extends Command {
   public void interrupted() {
 
   }
-
+  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

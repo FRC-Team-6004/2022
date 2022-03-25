@@ -15,7 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class LiftSubsystem extends SubsystemBase {
  
-    public CANSparkMax lift = new CANSparkMax(10, MotorType.kBrushless); 
+    public CANSparkMax lift = new CANSparkMax(9, MotorType.kBrushless); 
     public RelativeEncoder liftEncoder;
 
     double angle;

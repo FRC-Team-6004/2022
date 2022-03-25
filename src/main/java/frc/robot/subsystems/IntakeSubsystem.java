@@ -13,10 +13,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    public CANSparkMax pivot = new CANSparkMax(11, MotorType.kBrushless);
+    public CANSparkMax pivot = new CANSparkMax(5, MotorType.kBrushless);
     //public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
     public RelativeEncoder pivotEncoder;
-    public CANSparkMax intake = new CANSparkMax(13,MotorType.kBrushless); 
+    public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushless); 
     double angle = 0;
     boolean automaticControl = true;
 

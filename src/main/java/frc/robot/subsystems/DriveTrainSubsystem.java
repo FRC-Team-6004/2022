@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 public class DriveTrainSubsystem extends SubsystemBase {
   public DriveTrainSubsystem() {}
 
-  public WPI_TalonFX Left1 = new WPI_TalonFX(1);
-  public WPI_TalonFX Left2 = new WPI_TalonFX(2);
+  public WPI_TalonFX Left1 = new WPI_TalonFX(2);
+  public WPI_TalonFX Left2 = new WPI_TalonFX(4);
   public MotorControllerGroup Left = new MotorControllerGroup(Left1, Left2);
-  public WPI_TalonFX Right1 = new WPI_TalonFX(3);
-  public WPI_TalonFX Right2 = new WPI_TalonFX(4);
+  public WPI_TalonFX Right1 = new WPI_TalonFX(1);
+  public WPI_TalonFX Right2 = new WPI_TalonFX(3);
   public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
 

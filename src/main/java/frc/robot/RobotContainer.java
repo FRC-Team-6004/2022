@@ -36,19 +36,19 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  final ExampleSubsystem exampleSubsystem;
-  final DriveTrainSubsystem driveTrainSubsystem;
-  final ShooterSubsystem shooterSubsystem;
-  final IntakeSubsystem intakeSubsystem;
-  final LiftSubsystem liftSubsystem;
-  final VisionSubsystem visionSubsystem;
+  public final ExampleSubsystem exampleSubsystem;
+  public final DriveTrainSubsystem driveTrainSubsystem;
+  public final ShooterSubsystem shooterSubsystem;
+  public final IntakeSubsystem intakeSubsystem;
+  public final LiftSubsystem liftSubsystem;
+  public final VisionSubsystem visionSubsystem;
 
-  final ExampleCommand exampleCommand;
-  final DriveTrainCommand driveTrainCommand;
-  final IntakeCommand intakeCommand;
-  final ShooterCommand shooterCommand;
-  final LiftCommand liftCommand;
-  final VisionCommand visionCommand;
+  public final ExampleCommand exampleCommand;
+  public final DriveTrainCommand driveTrainCommand;
+  public final IntakeCommand intakeCommand;
+  public final ShooterCommand shooterCommand;
+  public final LiftCommand liftCommand;
+  public final VisionCommand visionCommand;
 
   public static Joystick operatorStick;
   public static Joystick driveStick;

@@ -13,22 +13,17 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ShooterSubsystem extends SubsystemBase {
-  public CANSparkMax shooterLeft = new CANSparkMax(7, MotorType.kBrushless);
-  public CANSparkMax shooterRight = new CANSparkMax(8, MotorType.kBrushless);
-  public CANSparkMax magazine = new CANSparkMax(9, MotorType.kBrushless); //ID needed
+  public CANSparkMax shooter = new CANSparkMax(8, MotorType.kBrushless);
+  public CANSparkMax magazine = new CANSparkMax(7, MotorType.kBrushless); //ID needed
   
-  private RelativeEncoder encoderLeft;
+  private RelativeEncoder encoder;
   
   public ShooterSubsystem() {
-    shooterLeft.restoreFactoryDefaults();
-    shooterRight.restoreFactoryDefaults();
+    shooter.restoreFactoryDefaults();
 
-    shooterRight.follow(shooterLeft, true);
-
-    shooterLeft.setIdleMode(IdleMode.kCoast);
-    shooterRight.setIdleMode(IdleMode.kCoast);
+    shooter.setIdleMode(IdleMode.kCoast);
         
-    encoderLeft = shooterLeft.getEncoder();
+    encoder = shooter.getEncoder();
     
   }
 
@@ -40,16 +35,16 @@ public class ShooterSubsystem extends SubsystemBase {
   public void joystickShoot(Boolean low, Boolean high, Boolean shoot){
     double lowPower = .4; //arbitrary
     double highPower = .65; //arbitrary
-    if(low && shoot){shooterLeft.setVoltage(-lowPower*12);}
-    else if(high && shoot){shooterLeft.setVoltage(-highPower*12);}
-    else{shooterLeft.setVoltage(0);}
+    if(low && shoot){shooter.setVoltage(-lowPower*12);}
+    else if(high && shoot){shooter.setVoltage(-highPower*12);}
+    else{shooter.setVoltage(0);}
 
-    SmartDashboard.putNumber("shooter encoder", encoderLeft.getVelocity());
+    SmartDashboard.putNumber("shooter encoder", encoder.getVelocity());
     
   }
 
   public void shoot(double speed){
-    shooterLeft.setVoltage(-speed*12);
+    shooter.setVoltage(-speed*12);
   }
 
   public void magazineManual(double speed){
