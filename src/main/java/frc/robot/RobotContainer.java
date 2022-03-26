@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -17,7 +18,7 @@ import frc.robot.subsystems.VisionSubsystem;
 
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
-
+import frc.robot.commands.Autonomous;
 import frc.robot.commands.DriveTrainCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -50,6 +51,8 @@ public class RobotContainer {
   public final LiftCommand liftCommand;
   public final VisionCommand visionCommand;
 
+  public final Autonomous autonomous;
+
   public static Joystick operatorStick;
   public static Joystick driveStick;
   //public static XboxController driveXboxController;
@@ -70,6 +73,8 @@ public class RobotContainer {
     liftCommand = new LiftCommand(liftSubsystem);
     visionSubsystem = new VisionSubsystem();
     visionCommand = new VisionCommand(visionSubsystem);
+
+    autonomous = new Autonomous();
 
     exampleCommand.addRequirements(exampleSubsystem);
     exampleSubsystem.setDefaultCommand(exampleCommand);
@@ -111,7 +116,7 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return exampleCommand;
+    return autonomous;
   }
   
 }

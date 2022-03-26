@@ -21,7 +21,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
 
-  double speed;
+  double speedFactor;
   boolean enableManual;
 
   @Override
@@ -29,20 +29,20 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   public void drive()
   {
-    Right.setInverted(true);
-    Left.setInverted(false);
 
   }
   public void joystickDrive(Double speed, Double turn, Boolean fast, Boolean vision){ 
-    
+    Right.setInverted(true);
+    Left.setInverted(false);
+
 
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(fast){speed = -.6;}
-      else{speed = -.4;}
+      if(fast){speedFactor = -0.8;}
+      else{speedFactor = -0.55;}
 
-      difDrive.arcadeDrive(speed, turn);
+      difDrive.arcadeDrive(speed*speedFactor, -turn*speedFactor);
     }
     if(vision){
       speed = .6;

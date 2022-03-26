@@ -6,12 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.Autonomous;
 import frc.robot.commands.DriveTrainCommand;
 
 /**
@@ -81,6 +83,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
     //driveTrainSubsystem = m_robotContainer.driveTrainSubsystem;
     intakeSubsystem = m_robotContainer.intakeSubsystem;
     shooterSubsystem = m_robotContainer.shooterSubsystem;
@@ -95,6 +98,7 @@ public class Robot extends TimedRobot {
     //driveTrainSubsystem.driveTank(-.4, -.4);
     //Timer.delay(1.5);
     //driveTrainSubsystem.driveTank(0, 0);
+    
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

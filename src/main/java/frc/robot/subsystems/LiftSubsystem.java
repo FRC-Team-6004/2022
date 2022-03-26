@@ -38,18 +38,18 @@ public class LiftSubsystem extends SubsystemBase {
         double speed = 0.5;
         SmartDashboard.putNumber("liftEncoder", liftEncoder.getPosition());
 
-        if(liftUp){ angle = 0; } //arbitrary
+        if(liftUp){ angle = 68; } //arbitrary
         //if(liftDown){ angle = 5.8; } //arbitrary
 
         if(liftUpManual || liftDownManual || liftDown){automaticControl = false;}
         else if(liftUp){automaticControl = true;}
 
         if(automaticControl){
-            /*
-            if(liftEncoder.getPosition() < angle - 0.5){lift.setVoltage(.1*12);}
-            else if(liftEncoder.getPosition() > angle + 0.5){lift.setVoltage(-.1*12);}
+            
+            if(liftEncoder.getPosition() < angle - 0.5){lift.setVoltage(.3*12);}
+            else if(liftEncoder.getPosition() > angle + 0.5){lift.setVoltage(-.3*12);}
             else{lift.setVoltage(0);}   
-            */
+            
         }
         else{
             if(liftUpManual){lift.setVoltage(speed*12);}

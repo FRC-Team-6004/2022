@@ -1,14 +1,22 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class Autonomous extends CommandGroup {
+public class Autonomous extends SequentialCommandGroup {
   /**
   * Add your docs here.
   */
   public Autonomous() {
-    addSequential(new DriveDistance(0));
-    addSequential(new Delay(0));
-
+    addCommands(
+      new ShootTime(.65,5),
+      new Delay(1),
+      new DriveDistance(12)
+    );
   }
+
+  public final void addCommands(ShootTime shootTime, Delay delay, DriveDistance driveDistance) {
+    //figuring out what to do here
+  }
+
+
 }
