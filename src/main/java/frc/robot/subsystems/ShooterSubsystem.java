@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ShooterSubsystem extends SubsystemBase {
+
   public WPI_TalonFX shooter = new WPI_TalonFX(8);
   public CANSparkMax magazine = new CANSparkMax(7, MotorType.kBrushless); //ID needed
   
@@ -24,16 +25,18 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    shooter.setVoltage(shooterSpeed*12);
+    magazine.setVoltage(magazineSpeed*12);
     
   }
 
   public void joystickShoot(Boolean low, Boolean high, Boolean shoot){
     double lowPower = .4; //arbitrary
     double highPower = .65; //arbitrary
+
     if(low && shoot){shooter.setVoltage(lowPower*12);}
     else if(high && shoot){shooter.setVoltage(highPower*12);}
     else{shooter.setVoltage(0);}
-    
   }
 
   public void shoot(double speed){
