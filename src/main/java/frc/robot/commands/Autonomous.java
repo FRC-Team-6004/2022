@@ -14,7 +14,7 @@ public class Autonomous extends SequentialCommandGroup {
   public Autonomous(DriveTrainSubsystem driveSub, ShooterSubsystem shootSub) {
 
     addCommands(
-      //new ShootTime(5, .5, shootSub),
+      new ShootTime(5, .5, shootSub),
       new Delay(5),
       new DriveDistance(500,-.5,driveSub)
     );
