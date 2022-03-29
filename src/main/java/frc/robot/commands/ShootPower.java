@@ -14,6 +14,7 @@ public class ShootPower extends CommandBase {
   private final double shootSpeed;
   private final double magSpeed;
   private Timer timer;
+  private final double endTime;
 
   /**
    * Creates a new DriveDistance.
@@ -22,7 +23,8 @@ public class ShootPower extends CommandBase {
    * @param speed The speed at which the robot will drive
    * @param drive The drive subsystem on which this command will run
    */
-  public ShootPower(double shooterSpeed, double magazineSpeed, ShooterSubsystem shooterSub) {
+  public ShootPower(double time, double shooterSpeed, double magazineSpeed, ShooterSubsystem shooterSub) {
+    endTime = time;
     shootSpeed = shooterSpeed;
     magSpeed = magazineSpeed;
     m_shooter = shooterSub;
@@ -54,6 +56,6 @@ public class ShootPower extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return timer.get()>4;
+    return timer.get()>endTime;
   }
 }
