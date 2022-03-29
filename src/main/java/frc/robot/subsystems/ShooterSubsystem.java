@@ -16,6 +16,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public WPI_TalonFX shooter = new WPI_TalonFX(8);
   public CANSparkMax magazine = new CANSparkMax(7, MotorType.kBrushless); //ID needed
+
+  public double shooterSpeed = 0;
+  public double magazineSpeed = 0;
   
   private RelativeEncoder encoder;
   
@@ -34,17 +37,17 @@ public class ShooterSubsystem extends SubsystemBase {
     double lowPower = .4; //arbitrary
     double highPower = .65; //arbitrary
 
-    if(low && shoot){shooter.setVoltage(lowPower*12);}
-    else if(high && shoot){shooter.setVoltage(highPower*12);}
-    else{shooter.setVoltage(0);}
+    if(low && shoot){shooterSpeed=lowPower;}
+    else if(high && shoot){shooterSpeed=highPower;}
+    else{shooterSpeed=0;}
   }
 
   public void shoot(double speed){
-    shooter.setVoltage(speed*12);
+    shooterSpeed=speed;
   }
 
   public void magazineManual(double speed){
-    magazine.setVoltage(speed*12);
+    magazineSpeed=speed;
   }
 
   @Override
