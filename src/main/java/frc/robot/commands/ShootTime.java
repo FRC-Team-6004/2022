@@ -1,63 +1,52 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.RobotContainer;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.Timer;
 
-public class ShootTime extends Command {
+public class ShootTime extends CommandBase {
 
-private double expireTime;
-private double timeout;
-private ShooterSubsystem shooterSubsystem;
-private RobotContainer robotContainer;
-private double shootPower;
+  private Timer timer;
+  private double timeout;
+  private double speed;
+  private ShooterSubsystem shooterSubsystem;
 
-  public ShootTime(double power, double seconds) {
+  public ShootTime(double seconds, double shootSpeed, ShooterSubsystem shooter) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    timer = new Timer();
     timeout = seconds;
-    shootPower = power;
+    shooterSubsystem = shooter;
+    speed = shootSpeed;
   }
 
-  protected void startTimer() {
-    expireTime = timeSinceInitialized() + timeout;
+  public void startTimer() {
+    timer.start();
+    //expireTime = timeSinceInitialized() + timeout;
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    robotContainer = new RobotContainer();
+  public void initialize() {
     startTimer();
+    //shooterSubsystem.joystickShoot(false, true, true);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    robotContainer.shooterSubsystem.shoot(shootPower);
-    if(timeSinceInitialized() > 1)
-    {
-      robotContainer.shooterSubsystem.magazineManual(.5);
+  public void execute() {
+    shooterSubsystem.joystickShoot(false, true, true);
+    if(timer.get() > 1){
+      shooterSubsystem.magazineManual(.4);
     }
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return (timeSinceInitialized() >= expireTime);
+  public boolean isFinished() {
+    return (timer.get() >= timeout);
   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    robotContainer.shooterSubsystem.shoot(0);
-    robotContainer.shooterSubsystem.magazineManual(0);
-
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
 }

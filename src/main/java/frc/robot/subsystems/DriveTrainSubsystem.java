@@ -6,6 +6,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
@@ -29,7 +32,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   public void drive()
   {
-
+    
   }
   public void joystickDrive(Double speed, Double turn, Boolean fast, Boolean vision){ 
     Right.setInverted(true);
@@ -44,10 +47,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
       difDrive.arcadeDrive(speed*speedFactor, -turn*speedFactor);
     }
+    /*
     if(vision){
+      
       speed = .6;
       difDrive.tankDrive(VisionSubsystem.aim(),-VisionSubsystem.aim());
+      
     }
+    */
   }
   public void driveTank(double leftSpeed, double rightSpeed) 
   {
@@ -60,13 +67,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
   }
   public void resetDriveEncoder() {
+    Left1.setSelectedSensorPosition(0);
+    Right1.setSelectedSensorPosition(0);
   }
   public void arcadeDrive(double d, double e) {
   }
-public double getDriveEncoderDistance() {
-    return 0;
-} 
-
+  public double getDriveEncoderDistance() {
+      return (Left1.getSelectedSensorPosition()+Right1.getSelectedSensorPosition())/2;
+  }  
 
 }
 

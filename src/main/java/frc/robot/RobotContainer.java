@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 
-import frc.robot.commands.VisionCommand;
-import frc.robot.subsystems.VisionSubsystem;
+//import frc.robot.commands.VisionCommand;
+//import frc.robot.subsystems.VisionSubsystem;
 
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -42,14 +42,14 @@ public class RobotContainer {
   public final ShooterSubsystem shooterSubsystem;
   public final IntakeSubsystem intakeSubsystem;
   public final LiftSubsystem liftSubsystem;
-  public final VisionSubsystem visionSubsystem;
+  //public final VisionSubsystem visionSubsystem;
 
   public final ExampleCommand exampleCommand;
   public final DriveTrainCommand driveTrainCommand;
   public final IntakeCommand intakeCommand;
   public final ShooterCommand shooterCommand;
   public final LiftCommand liftCommand;
-  public final VisionCommand visionCommand;
+  //public final VisionCommand visionCommand;
 
   public final Autonomous autonomous;
 
@@ -71,10 +71,10 @@ public class RobotContainer {
     shooterCommand = new ShooterCommand(shooterSubsystem);
     liftSubsystem = new LiftSubsystem();
     liftCommand = new LiftCommand(liftSubsystem);
-    visionSubsystem = new VisionSubsystem();
-    visionCommand = new VisionCommand(visionSubsystem);
+    //visionSubsystem = new VisionSubsystem();
+    //visionCommand = new VisionCommand(visionSubsystem);
 
-    autonomous = new Autonomous();
+    autonomous = new Autonomous(driveTrainSubsystem, shooterSubsystem);
 
     exampleCommand.addRequirements(exampleSubsystem);
     exampleSubsystem.setDefaultCommand(exampleCommand);
@@ -86,8 +86,8 @@ public class RobotContainer {
     shooterSubsystem.setDefaultCommand(shooterCommand);
     liftCommand.addRequirements(liftSubsystem);
     liftSubsystem.setDefaultCommand(liftCommand);
-    visionCommand.addRequirements(visionSubsystem);
-    visionSubsystem.setDefaultCommand(visionCommand);
+    //visionCommand.addRequirements(visionSubsystem);
+    //visionSubsystem.setDefaultCommand(visionCommand);
 
     operatorStick = new Joystick(1);
     driveStick = new Joystick(0);

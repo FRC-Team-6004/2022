@@ -4,52 +4,48 @@
 
 package frc.robot.commands;
 
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-/** An example command that uses an example subsystem. */
-public class DriveDistance extends Command {
+public class DriveDistance extends CommandBase {
+  private final DriveTrainSubsystem m_drive;
+  private final double m_distance;
+  private final double m_speed;
 
-    private double distance;
-    private RobotContainer robotContainer;
-    private DriveTrainSubsystem driveTrainSubsystem;
+  /**
+   * Creates a new DriveDistance.
+   *
+   * @param inches The number of inches the robot will drive
+   * @param speed The speed at which the robot will drive
+   * @param drive The drive subsystem on which this command will run
+   */
+  public DriveDistance(double inches, double speed, DriveTrainSubsystem drive) {
+    m_distance = inches;
+    m_speed = speed;
+    m_drive = drive;
+    m_drive.resetDriveEncoder();
+    addRequirements(m_drive);
+  }
 
-    public DriveDistance(double inches) {
-      //requires(Robot.driveTrainSubsystem);
-      distance = inches;
-    }
-
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    robotContainer = new RobotContainer();
-    robotContainer.driveTrainSubsystem.resetDriveEncoder();
+    m_drive.resetDriveEncoder();
+    m_drive.driveTank(m_speed, m_speed);
+
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    robotContainer.driveTrainSubsystem.arcadeDrive(.25, 0.0);
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end() {
-    robotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0.0);
+    m_drive.driveTank(m_speed, m_speed);
   }
 
   @Override
-  public void interrupted() {
-
+  public void end(boolean interrupted) {
+    m_drive.driveTank(0, 0);
   }
-  
-  // Returns true when the command should end.
+
   @Override
   public boolean isFinished() {
-    return Robot.driveTrainSubsystem.getDriveEncoderDistance() == distance;
+    return Math.abs(m_drive.getDriveEncoderDistance()) >= m_distance;
   }
 }
