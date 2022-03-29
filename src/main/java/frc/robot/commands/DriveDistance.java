@@ -30,6 +30,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void initialize() {
     m_drive.driveTank(m_speed, m_speed);
+    m_drive.brakeMode();
     initialDistance = m_drive.getDriveEncoderDistance();
 
   }
@@ -42,6 +43,7 @@ public class DriveDistance extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_drive.driveTank(0, 0);
+    
   }
 
   @Override
