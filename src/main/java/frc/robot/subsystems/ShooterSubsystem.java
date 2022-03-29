@@ -25,9 +25,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    shooter.setVoltage(shooterSpeed*12);
-    magazine.setVoltage(magazineSpeed*12);
-    
+
   }
 
   public void joystickShoot(Boolean low, Boolean high, Boolean shoot){
