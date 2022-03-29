@@ -26,7 +26,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private ShooterSubsystem shooterSubsystem;
 
   Timer timer;
   
@@ -79,6 +78,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
+    /*
     //driveTrainSubsystem = m_robotContainer.driveTrainSubsystem;
     shooterSubsystem = m_robotContainer.shooterSubsystem;
     //Timer.delay(11);
@@ -92,6 +92,7 @@ public class Robot extends TimedRobot {
     //driveTrainSubsystem.driveTank(-.4, -.4);
     //Timer.delay(1.5);
     //driveTrainSubsystem.driveTank(0, 0);
+    */
     
     
     // schedule the autonomous command (example)

@@ -38,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shoot(double speed){
-    shooter.setVoltage(speed*12);
+    shooter.set(speed*12);
   }
 
   public void magazineManual(double speed){

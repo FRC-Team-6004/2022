@@ -28,13 +28,16 @@ public class DriveTrainCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_subsystem.resetDriveEncoder();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
     Joystick drStick = RobotContainer.driveStick;
+    m_subsystem.coastMode();
     m_subsystem.joystickDrive(drStick.getY(), drStick.getTwist(), drStick.getRawButton(5), drStick.getRawButton(2));
     //XboxController controller = RobotContainer.driveXboxController;
     //m_subsystem.xboxControllerDrive(controller.getLeftY(), controller.getRightY(), (controller.getLeftTriggerAxis() > 0.2 ), controller.getLeftBumper(), (controller.getRightTriggerAxis() > 0.2 ));

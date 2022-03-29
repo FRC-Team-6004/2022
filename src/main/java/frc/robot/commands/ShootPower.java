@@ -5,13 +5,15 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveDistance extends CommandBase {
-  private final DriveTrainSubsystem m_drive;
-  private final double m_distance;
-  private final double m_speed;
-  private double initialDistance;
+public class ShootPower extends CommandBase {
+  private final ShooterSubsystem m_shooter;
+  private final double shootSpeed;
+  private final double magSpeed;
+  private Timer timer;
 
   /**
    * Creates a new DriveDistance.
@@ -20,32 +22,38 @@ public class DriveDistance extends CommandBase {
    * @param speed The speed at which the robot will drive
    * @param drive The drive subsystem on which this command will run
    */
-  public DriveDistance(double units, double speed, DriveTrainSubsystem drive) {
-    m_distance = units; //84000 units in 6 feet (72 inches) (1166.667 units in 1 inch)
-    m_speed = speed;
-    m_drive = drive;
-    addRequirements(m_drive);
+  public ShootPower(double shooterSpeed, double magazineSpeed, ShooterSubsystem shooterSub) {
+    shootSpeed = shooterSpeed;
+    magSpeed = magazineSpeed;
+    m_shooter = shooterSub;
+    addRequirements(m_shooter);
   }
 
   @Override
   public void initialize() {
-    m_drive.driveTank(m_speed, m_speed);
-    initialDistance = m_drive.getDriveEncoderDistance();
+    m_shooter.shoot(shootSpeed);
+    timer = new Timer();
+    timer.reset();
+    timer.start();
 
   }
 
   @Override
   public void execute() {
-    m_drive.driveTank(m_speed, m_speed);
+    m_shooter.shoot(shootSpeed);
+    if(timer.get()>2){
+      m_shooter.magazineManual(magSpeed);
+    }
+
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_drive.driveTank(0, 0);
+    m_shooter.shoot(0);
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(m_drive.getDriveEncoderDistance())+initialDistance >= m_distance * 1166.667;
+    return timer.get()>4;
   }
 }

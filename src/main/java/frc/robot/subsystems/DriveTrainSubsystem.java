@@ -5,16 +5,21 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class DriveTrainSubsystem extends SubsystemBase {
-  public DriveTrainSubsystem() {}
+  public DriveTrainSubsystem() {
+    resetDriveEncoder();
+  }
 
   public WPI_TalonFX Left1 = new WPI_TalonFX(2);
   public WPI_TalonFX Left2 = new WPI_TalonFX(4);
@@ -29,6 +34,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("driveSpeed", getDriveEncoderDistance());
   }
   public void drive()
   {
@@ -58,7 +64,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
   public void driveTank(double leftSpeed, double rightSpeed) 
   {
-    difDrive.tankDrive(leftSpeed, -rightSpeed);
+    Right.setInverted(true);
+    Left.setInverted(false);
+    difDrive.tankDrive(leftSpeed, rightSpeed);
   }
   public void alignToTarget() {
     
@@ -73,8 +81,21 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void arcadeDrive(double d, double e) {
   }
   public double getDriveEncoderDistance() {
-      return (Left1.getSelectedSensorPosition()+Right1.getSelectedSensorPosition())/2;
+      return Left1.getSelectedSensorPosition();
   }  
+
+  public void brakeMode() {
+    Left1.setNeutralMode(NeutralMode.Brake);
+    Left2.setNeutralMode(NeutralMode.Brake);
+    Right1.setNeutralMode(NeutralMode.Brake);
+    Right2.setNeutralMode(NeutralMode.Brake);
+  }
+  public void coastMode() {
+    Left1.setNeutralMode(NeutralMode.Coast);
+    Left2.setNeutralMode(NeutralMode.Coast);
+    Right1.setNeutralMode(NeutralMode.Coast);
+    Right2.setNeutralMode(NeutralMode.Coast);
+  }
 
 }
 
