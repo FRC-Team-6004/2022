@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -13,10 +14,10 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    public CANSparkMax pivot = new CANSparkMax(11, MotorType.kBrushless);
+    public CANSparkMax pivot = new CANSparkMax(5, MotorType.kBrushless);
     //public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
     public RelativeEncoder pivotEncoder;
-    public CANSparkMax intake = new CANSparkMax(13,MotorType.kBrushless); 
+    public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushless); 
     double angle = 0;
     boolean automaticControl = true;
 
@@ -36,7 +37,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual)
     {
         if(pivotUp){ angle = 0; }
-        if(pivotDown){ angle = 5.9; }
+        if(pivotDown){ angle = 13.0; }
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
@@ -44,8 +45,8 @@ public class IntakeSubsystem extends SubsystemBase {
         else if(pivotUp || pivotDown){automaticControl = true;}
 
         if(automaticControl){
-            if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.3*12);}
-            else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.3*12);}
+            if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.1*12);}
+            else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.2*12);}
             else{pivot.setVoltage(0);}     
         }
         else{
