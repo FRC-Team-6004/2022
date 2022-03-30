@@ -36,8 +36,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual)
     {
-        if(pivotUp){ angle = 0; }
-        if(pivotDown){ angle = 13.0; }
+        if(pivotUp){ angle = -1; }
+        if(pivotDown){ angle = 12.0; }
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 

@@ -74,7 +74,7 @@ public class RobotContainer {
     //visionSubsystem = new VisionSubsystem();
     //visionCommand = new VisionCommand(visionSubsystem);
 
-    autonomous = new Autonomous(driveTrainSubsystem, shooterSubsystem);
+    autonomous = new Autonomous(driveTrainSubsystem, shooterSubsystem, intakeSubsystem);
 
     exampleCommand.addRequirements(exampleSubsystem);
     exampleSubsystem.setDefaultCommand(exampleCommand);

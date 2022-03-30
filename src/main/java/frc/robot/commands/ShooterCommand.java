@@ -40,8 +40,8 @@ public class ShooterCommand extends CommandBase {
     //XboxController cont = RobotContainer.driveXboxController;
     m_subsystem.joystickShoot(opStick.getRawButton(3),opStick.getRawButton(5), opStick.getRawButton(1)); //switch .joystickShootPID to .joystickShoot for voltage
     double magazineSpeed;
-    if((opStick.getRawButton(11)||opStick.getRawButton(9))){magazineSpeed = .3;}
-    else if((opStick.getRawButton(12)||opStick.getRawButton(10))){magazineSpeed = -.3;}
+    if((opStick.getRawButton(11)||opStick.getRawButton(9))){magazineSpeed = .5;}
+    else if((opStick.getRawButton(12)||opStick.getRawButton(10))){magazineSpeed = -.5;}
     else{magazineSpeed=0;}
 
     m_subsystem.magazineManual(magazineSpeed);

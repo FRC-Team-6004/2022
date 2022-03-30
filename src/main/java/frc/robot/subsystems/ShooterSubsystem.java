@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void joystickShoot(Boolean low, Boolean high, Boolean shoot){
     double lowPower = .4; //arbitrary
-    double highPower = .65; //arbitrary
+    double highPower = .6; //arbitrary
 
     if(low && shoot){shooter.setVoltage(lowPower*12);}
     else if(high && shoot){shooter.setVoltage(highPower*12);}
