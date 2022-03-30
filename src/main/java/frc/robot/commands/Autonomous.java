@@ -14,21 +14,21 @@ public class Autonomous extends SequentialCommandGroup {
   public Autonomous(DriveTrainSubsystem driveSub, ShooterSubsystem shootSub, IntakeSubsystem intakeSub) {
 
     addCommands(
-      new ShootPower(4,.1,.5,shootSub),
-      new Delay(0.5),
-      new DriveRotateDistance(180,.4,driveSub),
-      new Delay(0.5),
+      new ShootPower(3,.1,.6,shootSub),
+      new Delay(0.1),
+      new DriveRotateDistance(180,.6,driveSub),
+      new Delay(0.1),
       parallel(
         new DriveDistance(42,.35,driveSub),//go to ball (40 inches)
         new IntakeTime(4, .4, intakeSub, shootSub)
       ),
-      new DriveRotateDistance(180,-.4,driveSub),
-      new Delay(0.5),
-      new DriveDistance(42,.4,driveSub),
-      new Delay(0.5),
-      new ShootPower(4,.1,.5,shootSub),
-      new Delay(0.5),
-      new DriveDistance(42,-.4,driveSub)
+      new DriveRotateDistance(180,-.6,driveSub),
+      new Delay(0.1),
+      new DriveDistance(42,.75,driveSub),
+      new Delay(0.1),
+      new ShootPower(3,.1,.6,shootSub),
+      new Delay(0.1),
+      new DriveDistance(42,-.75,driveSub)
       
     );
   }
