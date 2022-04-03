@@ -15,7 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class LiftSubsystem extends SubsystemBase {
  
-    public CANSparkMax lift = new CANSparkMax(10, MotorType.kBrushless); 
+    public CANSparkMax lift = new CANSparkMax(9, MotorType.kBrushless); 
     public RelativeEncoder liftEncoder;
 
     double angle;
@@ -35,25 +35,25 @@ public class LiftSubsystem extends SubsystemBase {
     }
     public void liftControl(boolean liftUp, boolean liftDown, boolean liftUpManual, boolean liftDownManual)
     {
-        double speed = 0.5;
+        double speed = 0.75;
         SmartDashboard.putNumber("liftEncoder", liftEncoder.getPosition());
 
-        if(liftUp){ angle = 0; } //arbitrary
-        //if(liftDown){ angle = 5.8; } //arbitrary
+        if(liftUp){ angle = 198; } //arbitrary
+        if(liftDown){ angle = 2; } //arbitrary
 
-        if(liftUpManual || liftDownManual || liftDown){automaticControl = false;}
-        else if(liftUp){automaticControl = true;}
+        if(liftUpManual || liftDown){automaticControl = false;}
+        else if(liftUp || liftDownManual){automaticControl = true;}
 
         if(automaticControl){
-            /*
-            if(liftEncoder.getPosition() < angle - 0.5){lift.setVoltage(.1*12);}
-            else if(liftEncoder.getPosition() > angle + 0.5){lift.setVoltage(-.1*12);}
+            
+            if(liftEncoder.getPosition() < angle - 2.5){lift.setVoltage(speed*12);}
+            else if(liftEncoder.getPosition() > angle + 2.5){lift.setVoltage(-speed*12);}
             else{lift.setVoltage(0);}   
-            */
+            
         }
         else{
             if(liftUpManual){lift.setVoltage(speed*12);}
-            else if(liftDownManual || liftDown){lift.setVoltage(-speed*12);}
+            else if(liftDownManual || liftDown){lift.setVoltage(-speed*0.2*12);}
             else{lift.setVoltage(0);}
         }
     }

@@ -6,12 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.Autonomous;
 import frc.robot.commands.DriveTrainCommand;
 
 /**
@@ -24,12 +26,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private DriveTrainCommand driveTrainCommand;
-  
-  
-  public DriveTrainSubsystem driveTrainSubsystem;
-  public IntakeSubsystem intakeSubsystem;
-  public ShooterSubsystem shooterSubsystem;
 
   Timer timer;
   
@@ -80,22 +76,24 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();  
-
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    
+    /*
     //driveTrainSubsystem = m_robotContainer.driveTrainSubsystem;
-    intakeSubsystem = m_robotContainer.intakeSubsystem;
     shooterSubsystem = m_robotContainer.shooterSubsystem;
     //Timer.delay(11);
     shooterSubsystem.shoot(.65);
-    Timer.delay(3);
+    Timer.delay(2);
     shooterSubsystem.magazineManual(.2);
-    Timer.delay(5);
+    Timer.delay(3);
     shooterSubsystem.shoot(0); 
     shooterSubsystem.magazineManual(0);
    // Timer.delay(1);
     //driveTrainSubsystem.driveTank(-.4, -.4);
     //Timer.delay(1.5);
     //driveTrainSubsystem.driveTank(0, 0);
+    */
+    
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

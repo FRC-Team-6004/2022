@@ -40,7 +40,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute()
   {
-    Joystick stick = RobotContainer.driveStick;
+    Joystick opStick = RobotContainer.operatorStick;
+    Joystick drStick = RobotContainer.driveStick;
 
     /*
     if(stick.getRawButtonPressed(5)){pivotUp = true;}
@@ -55,22 +56,22 @@ public class IntakeCommand extends CommandBase {
     if((stick.getRawButtonReleased(7)||stick.getRawButtonReleased(9))){intakeIn = false;}
     else if((stick.getRawButtonReleased(8)||stick.getRawButtonReleased(10))){intakeOut = false;}
     */
-    if((stick.getRawButton(5))){pivotUp = true;}
+    if((drStick.getRawButton(3))){pivotUp = true;}
     else{pivotUp = false;}
-    if((stick.getRawButton(3))){pivotDown = true;}
+    if((drStick.getRawButton(4))){pivotDown = true;}
     else{pivotDown = false;}
 
-    if((stick.getRawButton(7))||(stick.getRawButton(9))){intakeIn = true;}
+    if((drStick.getRawButton(1))||(opStick.getRawButton(9))){intakeIn = true;}
     else{intakeIn = false;}
-    if((stick.getRawButton(8))||(stick.getRawButton(10))){intakeOut = true;}
+    if(((opStick.getRawButton(10)))){intakeOut = true;}
     else{intakeOut = false;}
 
 
     SmartDashboard.putBoolean("intakeIn", intakeIn);
     SmartDashboard.putBoolean("intakeOut", intakeOut);
 
-    m_subsystem.rotateIntake(pivotUp,pivotDown, (stick.getPOV() == 270), (stick.getPOV()== 90));
-    m_subsystem.IntakeManual(intakeIn,intakeOut,stick.getRawAxis(3));
+    m_subsystem.rotateIntake(pivotUp,pivotDown, (opStick.getPOV() == 270), (opStick.getPOV()== 90), drStick.getRawButton(6),drStick.getRawButtonReleased(6));
+    m_subsystem.IntakeManual(intakeIn,intakeOut,0.35);
   }
 
   // Called once the command ends or is interrupted.
