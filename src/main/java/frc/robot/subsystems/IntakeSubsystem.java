@@ -17,7 +17,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public CANSparkMax pivot = new CANSparkMax(5, MotorType.kBrushless);
     //public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
     public RelativeEncoder pivotEncoder;
-    public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushless); 
+    public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushed); 
     double angle = 0;
     boolean automaticControl = true;
 
@@ -34,15 +34,15 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
 
-    public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual)
+    public void rotateIntake(Boolean pivotUp, Boolean pivotDown, Boolean pivotUpManual, Boolean pivotDownManual, Boolean pivotHeld, Boolean pivotHeldReleased)
     {
-        if(pivotUp){ angle = -1; }
-        if(pivotDown){ angle = 12.0; }
+        if(pivotUp || pivotHeld){ angle = -1; }
+        if(pivotDown || pivotHeldReleased){ angle = 12.0; }
         
         SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
         if(pivotUpManual || pivotDownManual){automaticControl = false;}
-        else if(pivotUp || pivotDown){automaticControl = true;}
+        else if(pivotUp || pivotDown || pivotHeld){automaticControl = true;}
 
         if(automaticControl){
             if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.1*12);}

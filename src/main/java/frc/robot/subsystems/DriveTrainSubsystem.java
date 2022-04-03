@@ -14,11 +14,14 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 
 public class DriveTrainSubsystem extends SubsystemBase {
   public DriveTrainSubsystem() {
     resetDriveEncoder();
+    resetNavX();
   }
 
   public WPI_TalonFX Left1 = new WPI_TalonFX(2);
@@ -28,6 +31,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public WPI_TalonFX Right2 = new WPI_TalonFX(3);
   public MotorControllerGroup Right = new MotorControllerGroup(Right1, Right2);
   public DifferentialDrive difDrive = new DifferentialDrive(Left, Right);
+  public AHRS ahrs = new AHRS(SPI.Port.kMXP);
+
 
   double speedFactor;
   boolean enableManual;
@@ -35,6 +40,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("driveSpeed", getDriveEncoderDistance());
+    SmartDashboard.putNumber("yaw", getYaw());
   }
   public void drive()
   {
@@ -48,8 +54,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     if(vision){enableManual = false;}
     else{enableManual = true;}
     if(enableManual){
-      if(fast){speedFactor = -0.8;}
-      else{speedFactor = -0.55;}
+      if(fast){speedFactor = -0.85;}
+      else{speedFactor = -0.75;}
 
       difDrive.arcadeDrive(speed*speedFactor, -turn*speedFactor);
     }
@@ -97,5 +103,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     Right2.setNeutralMode(NeutralMode.Coast);
   }
 
+  public void resetNavX() {
+    ahrs.reset();
+  }
+  public double getYaw() { 
+    return ahrs.getYaw();
+  }
 }
 

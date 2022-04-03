@@ -36,7 +36,7 @@ public class IntakeTime extends CommandBase {
 
   @Override
   public void execute() {
-    m_intake.rotateIntake(false, true, false, false);
+    m_intake.rotateIntake(false, true, false, false, false, false);
     if(timer.get() > 1 && timer.get() < endTime) { 
       m_intake.IntakeManual(true,false,intakeSpeed); 
       m_shoot.magazineManual(.5);

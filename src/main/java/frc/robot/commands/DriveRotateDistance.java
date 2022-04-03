@@ -21,7 +21,7 @@ public class DriveRotateDistance extends CommandBase {
    * @param drive The drive subsystem on which this command will run
    */
   public DriveRotateDistance(double degrees, double speed, DriveTrainSubsystem drive) {
-    m_degrees = degrees; //88000 units in one rotation
+    m_degrees = degrees;
     m_speed = speed;
     m_drive = drive;
     addRequirements(m_drive);
@@ -48,6 +48,6 @@ public class DriveRotateDistance extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(m_drive.getDriveEncoderDistance())+initialDistance >= (m_degrees/360)*88000;
+    return (m_drive.getYaw()) > (m_degrees - 2.5)&&(m_drive.getYaw()) < (m_degrees + 2.5);
   }
 }

@@ -26,7 +26,7 @@ public class ShootPower extends CommandBase {
 
   @Override
   public void initialize() {
-    m_shooter.joystickShoot(false, true, true);
+    m_shooter.joystickShoot(false, true, true, 0.4, 0.625);
     timer = new Timer();
     timer.reset();
     timer.start();
@@ -35,8 +35,8 @@ public class ShootPower extends CommandBase {
 
   @Override
   public void execute() {
-    m_shooter.joystickShoot(false, true, true);
-    if(timer.get()>2){
+    m_shooter.joystickShoot(false, true, true, 0.4, 0.625);
+    if(timer.get()>.75){
       m_shooter.magazineManual(magSpeed);
     }
 

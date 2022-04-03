@@ -63,15 +63,15 @@ public class IntakeCommand extends CommandBase {
 
     if((drStick.getRawButton(1))||(opStick.getRawButton(9))){intakeIn = true;}
     else{intakeIn = false;}
-    if((drStick.getRawButton(6))||(opStick.getRawButton(10))){intakeOut = true;}
+    if(((opStick.getRawButton(10)))){intakeOut = true;}
     else{intakeOut = false;}
 
 
     SmartDashboard.putBoolean("intakeIn", intakeIn);
     SmartDashboard.putBoolean("intakeOut", intakeOut);
 
-    m_subsystem.rotateIntake(pivotUp,pivotDown, (opStick.getPOV() == 270), (opStick.getPOV()== 90));
-    m_subsystem.IntakeManual(intakeIn,intakeOut,0.5);
+    m_subsystem.rotateIntake(pivotUp,pivotDown, (opStick.getPOV() == 270), (opStick.getPOV()== 90), drStick.getRawButton(6),drStick.getRawButtonReleased(6));
+    m_subsystem.IntakeManual(intakeIn,intakeOut,0.35);
   }
 
   // Called once the command ends or is interrupted.
