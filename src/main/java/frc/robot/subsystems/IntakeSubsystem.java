@@ -11,23 +11,25 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-    public CANSparkMax pivot = new CANSparkMax(5, MotorType.kBrushless);
-    //public CANSparkMax pivotFollow = new CANSparkMax(12, MotorType.kBrushless);
+    public WPI_TalonFX pivot = new WPI_TalonFX(5);
+    public WPI_TalonFX pivotFollow = new WPI_TalonFX(12);
     public RelativeEncoder pivotEncoder;
     public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushed); 
     double angle = 0;
     boolean automaticControl = true;
 
     public IntakeSubsystem() {
-        //pivotFollow.follow(pivot, true);
+        pivotFollow.follow(pivot);
+        pivotFollow.setInverted(true);
 
-        pivot.setIdleMode(IdleMode.kBrake);
+        pivot.setNeutralMode(NeutralMode.Brake);
         //pivotFollow.setIdleMode(IdleMode.kBrake);
-
-        pivotEncoder = pivot.getEncoder();
 
         pivotEncoder.setPosition(0);
         angle = 0;
