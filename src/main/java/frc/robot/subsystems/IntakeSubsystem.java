@@ -19,8 +19,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public WPI_TalonFX pivot = new WPI_TalonFX(5);
     public WPI_TalonFX pivotFollow = new WPI_TalonFX(12);
-    public RelativeEncoder pivotEncoder;
-    public CANSparkMax intake = new CANSparkMax(6,MotorType.kBrushed); 
+    public WPI_TalonFX intake = new WPI_TalonFX(6); 
     double angle = 0;
     boolean automaticControl = true;
 
@@ -31,7 +30,6 @@ public class IntakeSubsystem extends SubsystemBase {
         pivot.setNeutralMode(NeutralMode.Brake);
         //pivotFollow.setIdleMode(IdleMode.kBrake);
 
-        pivotEncoder.setPosition(0);
         angle = 0;
 
     }
@@ -41,22 +39,24 @@ public class IntakeSubsystem extends SubsystemBase {
         if(pivotUp || pivotHeld){ angle = -1; }
         if(pivotDown || pivotHeldReleased){ angle = 12.0; }
         
-        SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
+        //SmartDashboard.putNumber("intakePivotEncoder", pivotEncoder.getPosition());
 
         if(pivotUpManual || pivotDownManual){automaticControl = false;}
         else if(pivotUp || pivotDown || pivotHeld){automaticControl = true;}
-
+        /*
         if(automaticControl){
             if(pivotEncoder.getPosition() < angle - 0.5){pivot.setVoltage(.1*12);}
             else if(pivotEncoder.getPosition() > angle + 0.5){pivot.setVoltage(-.2*12);}
             else{pivot.setVoltage(0);}     
         }
+        
         else{
+            */
             if(pivotUpManual){pivot.setVoltage(0.3*12);}
             else if(pivotDownManual){pivot.setVoltage(-.3*12);}
             else{pivot.setVoltage(0);}
-        }
-
+        //}
+        
     }
     public void IntakeManual(Boolean intakeIn, Boolean intakeOut, double speed)
     {
