@@ -38,7 +38,7 @@ public class DriveTrainCommand extends CommandBase {
   {
     Joystick drStick = RobotContainer.driveStick;
     m_subsystem.coastMode();
-    m_subsystem.joystickDrive(drStick.getY(), drStick.getTwist(), drStick.getRawButton(5), drStick.getRawButton(2));
+    m_subsystem.joystickDrive(drStick.getY()*.3, drStick.getTwist()*.3, drStick.getRawButton(5), drStick.getRawButton(2));
     //XboxController controller = RobotContainer.driveXboxController;
     //m_subsystem.xboxControllerDrive(controller.getLeftY(), controller.getRightY(), (controller.getLeftTriggerAxis() > 0.2 ), controller.getLeftBumper(), (controller.getRightTriggerAxis() > 0.2 ));
     //DriveTrainSubsystem.joystickDrive(RobotContainer.driveStick, .25);
