@@ -36,7 +36,7 @@ public class LiftSubsystem extends SubsystemBase {
     public void liftControl(boolean liftUp, boolean liftDown, boolean liftUpManual, boolean liftDownManual)
     {
         double speed = 0.75;
-        SmartDashboard.putNumber("liftEncoder", liftEncoder.getPosition());
+        //SmartDashboard.putNumber("liftEncoder", liftEncoder.getPosition());
 
         if(liftUp){ angle = 198; } //arbitrary
         if(liftDown){ angle = 2; } //arbitrary

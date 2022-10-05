@@ -57,7 +57,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
       if(fast){speedFactor = -0.85;}
       else{speedFactor = -0.75;}
 
-      difDrive.arcadeDrive(speed*speedFactor, -turn*speedFactor);
+      difDrive.arcadeDrive(speed*speedFactor, -turn*speedFactor *1);
     }
     /*
     if(vision){

@@ -67,11 +67,11 @@ public class IntakeCommand extends CommandBase {
     else{intakeOut = false;}
 
 
-    SmartDashboard.putBoolean("intakeIn", intakeIn);
-    SmartDashboard.putBoolean("intakeOut", intakeOut);
+    //SmartDashboard.putBoolean("intakeIn", intakeIn);
+    //SmartDashboard.putBoolean("intakeOut", intakeOut);
 
     m_subsystem.rotateIntake(pivotUp,pivotDown, (opStick.getPOV() == 270), (opStick.getPOV()== 90), drStick.getRawButton(6),drStick.getRawButtonReleased(6));
-    m_subsystem.IntakeManual(intakeIn,intakeOut,0.4);
+    m_subsystem.IntakeManual(intakeIn,intakeOut,0.3);
   }
 
   // Called once the command ends or is interrupted.
